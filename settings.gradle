@@ -1,0 +1,2 @@
+include ':app', ':home', ':shop', ':comment', ':order', ':login', ':base', ':provider',
+        ':base:injection', ':base:network', ':base:imagefetcher', ':base:routerapi', ':base:routerbase', ':base:routerprocessor'
