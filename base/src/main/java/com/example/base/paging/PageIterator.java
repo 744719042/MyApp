@@ -5,7 +5,7 @@ package com.example.base.paging;
  */
 public class PageIterator {
     private static final int DEFAULT_PAGE_INDEX = 1;
-    private static final int DEFAULT_PAGE_SIZE = 5;
+    private static final int DEFAULT_PAGE_SIZE = 10;
 
     private int pageSize;
     private int page = DEFAULT_PAGE_INDEX;
@@ -44,7 +44,7 @@ public class PageIterator {
         int pages = total / pageSize;
         int totalPage = total % pageSize == 0 ? pages : (pages + 1);
         // 如果下一页页码小于等于总页面数，就表明还有下一页
-        if (page + 1 <= totalPage) {
+        if (page <= totalPage) {
             return true;
         }
         return false;
@@ -72,5 +72,6 @@ public class PageIterator {
     public void reset() {
         total = -1;
         lastCount = 0;
+        page = DEFAULT_PAGE_INDEX;
     }
 }

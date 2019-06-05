@@ -16,25 +16,25 @@ public abstract class AbsModule implements Module {
         this.binder = new Binder();
     }
 
-    public BindingBuilder bind(Class<?> clazz) {
+    public AbsModule bind(Class<?> clazz) {
         builder = new BindingBuilder();
         builder.keyClass(clazz);
-        return builder;
+        return this;
     }
 
-    public BindingBuilder annotatedWith(Name name) {
+    public AbsModule annotatedWith(Name name) {
         builder.name(name);
-        return builder;
+        return this;
     }
 
-    public BindingBuilder eager() {
+    public AbsModule eager() {
         builder.eager();
-        return builder;
+        return this;
     }
 
-    public BindingBuilder singleton() {
+    public AbsModule singleton() {
         builder.singleton();
-        return builder;
+        return this;
     }
 
     public void to(Class<?> clazz) {
