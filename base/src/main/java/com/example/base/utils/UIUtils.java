@@ -1,6 +1,7 @@
 package com.example.base.utils;
 
 import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
 import com.example.base.BaseApplication;
@@ -42,5 +43,15 @@ public class UIUtils {
         } catch (Throwable t) {
             return 0;
         }
+    }
+
+    public static int getScreenWidth() {
+        DisplayMetrics displayMetrics = BaseApplication.getContext().getResources().getDisplayMetrics();
+        return displayMetrics.widthPixels;
+    }
+
+    public static int getScreenHeight() {
+        DisplayMetrics displayMetrics = BaseApplication.getContext().getResources().getDisplayMetrics();
+        return displayMetrics.heightPixels;
     }
 }

@@ -4,4 +4,18 @@
         <attr name="xRadius" format="dimension" />
         <attr name="yRadius" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="AbNormalLayout">
+        <attr name="twoCardsAspect" format="float" />
+        <attr name="threeCardsAspect" format="float" />
+        <attr name="fourCardsAspect" format="float" />
+        <attr name="fiveCardsAspect" format="float" />
+        <attr name="cellPadding" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="AbNormalLayout_Layout">
+        <attr name="widthRatio" format="float" />
+        <attr name="heightRatio" format="float" />
+        <attr name="aspect" format="float" />
+    </declare-styleable>
 </resources>
