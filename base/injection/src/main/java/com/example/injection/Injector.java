@@ -13,7 +13,7 @@ public class Injector {
     private TrivalAssembly trivalAssembly;
     private ProviderAssembly providerAssembly;
 
-    private Injector(Module... modules) {
+    public Injector(Module... modules) {
         for (Module module : modules) {
             module.configure();
             binder.getBindings().putAll(module.getBinder().getBindings());
@@ -28,6 +28,14 @@ public class Injector {
                 initSingleInstance(entry.getKey());
             }
         }
+    }
+
+    public Object getObject(Class<?> clazz) {
+        return assembly(new Key(clazz));
+    }
+
+    public Object getObject(Class<?> clazz, String name) {
+        return assembly(new Key(clazz, NameImpl.valueOf(name)));
     }
 
     private void initSingleInstance(Key key) {

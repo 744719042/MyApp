@@ -23,10 +23,10 @@ public class NetworkWrapper {
     private HttpClient httpClient;
     private Gson gson;
 
-    public NetworkWrapper(String baseHost, HttpClient httpClient) {
+    public NetworkWrapper(String baseHost, HttpClient httpClient, Gson gson) {
         this.baseHost = baseHost;
         this.httpClient = httpClient;
-        this.gson = new Gson();
+        this.gson = gson;
     }
 
     public <T> T create(Class<T> tClass) {

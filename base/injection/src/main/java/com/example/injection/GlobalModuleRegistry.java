@@ -19,4 +19,8 @@ public class GlobalModuleRegistry {
     public void registerGlobalModule(Module module) {
         modules.add(module);
     }
+
+    public List<Module> getGlobalModules() {
+        return modules;
+    }
 }
