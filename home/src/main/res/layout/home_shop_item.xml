@@ -44,64 +44,31 @@
             android:baselineAligned="false">
 
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:id="@+id/comment_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_vertical">
 
-                <LinearLayout
-                    android:id="@+id/reserve_layout"
+                <RatingBar
+                    android:id="@+id/rating_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center_vertical">
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="6dp"
+                    android:clickable="false"
+                    android:gravity="center_vertical"
+                    android:isIndicator="true"
+                    android:max="5"
+                    android:rating="5" />
 
-                    <TextView
-                        android:id="@+id/txt_poiList_adapter_reserve_status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="3dp"
-                        android:textSize="10sp"
-                        android:visibility="gone" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:textSize="12sp"
-                        android:id="@+id/txt_poiList_adapter_reserve_desc" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/comment_layout"
+                <TextView
+                    android:id="@+id/month_sale"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center_vertical">
-
-                    <RatingBar
-                        android:id="@+id/poiList_adapter_comment_ratingBar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="6dp"
-                        android:clickable="false"
-                        android:gravity="center_vertical"
-                        android:isIndicator="true"
-                        android:max="5"
-                        android:rating="5" />
-
-                    <TextView
-                        android:id="@+id/txt_poiList_adapter_month_sale"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="5dp"
-                        android:gravity="center_vertical" />
-
-                </LinearLayout>
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:gravity="center_vertical" />
 
             </LinearLayout>
 

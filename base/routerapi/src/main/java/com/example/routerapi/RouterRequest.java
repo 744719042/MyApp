@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
+import com.example.routerapi.disptcher.RouterDispatcherHelper;
 import com.example.routerbase.RouterConfig;
 
 import java.lang.ref.WeakReference;
@@ -127,6 +128,10 @@ public class RouterRequest {
         public Builder withExtra(int extra) {
             this.extra = extra;
             return this;
+        }
+
+        public void navigate() {
+            RouterDispatcherHelper.dispatch(build());
         }
 
         public RouterRequest build() {

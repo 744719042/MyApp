@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.example.imagefetcher.ImageFetcher;
@@ -36,6 +37,11 @@ public class BaseRecyclerViewHolder extends RecyclerView.ViewHolder {
         textView.setText(text);
     }
 
+    public void setRating(@IdRes int id, float score) {
+        RatingBar ratingBar = getView(id);
+        ratingBar.setRating(score);
+    }
+
     public void setText(@IdRes int id, @StringRes int text) {
         TextView textView = getView(id);
         textView.setText(text);
@@ -49,11 +55,6 @@ public class BaseRecyclerViewHolder extends RecyclerView.ViewHolder {
     public void setImageResource(@IdRes int id, @DrawableRes int drawable) {
         ImageView imageView = getView(id);
         imageView.setImageResource(drawable);
-    }
-
-    public void setImageUrl(@IdRes int id, String url, @DrawableRes int placeholder) {
-        ImageView imageView = getView(id);
-        // TODO
     }
 
     public void setOnClickListener(@IdRes int id, View.OnClickListener onClickListener) {

@@ -8,13 +8,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.base.recycler.BaseRecyclerAdapter;
-import com.example.base.recycler.BaseRecyclerViewHolder;
 import com.example.base.ui.PagedFragment;
 import com.example.base.widget.HorizontalBannerView;
 import com.example.base.widget.VerticalBannerView;
 import com.example.base.widget.custom.AbNormalLayout;
 import com.example.home.HomeModule;
 import com.example.home.R;
+import com.example.home.adapter.HorizontalBannerAdapter;
+import com.example.home.adapter.ShopAdapter;
+import com.example.home.adapter.VerticalBannerAdapter;
 import com.example.home.model.Card;
 import com.example.home.model.HorizontalBanner;
 import com.example.home.model.Shop;
@@ -61,12 +63,7 @@ public class HomeFragment extends PagedFragment {
 
     @Override
     protected BaseRecyclerAdapter createAdapter() {
-        return new BaseRecyclerAdapter<Shop>(new ArrayList<Shop>(), getContext(), R.layout.home_shop_item) {
-            @Override
-            protected void bindView(BaseRecyclerViewHolder holder, Shop shop, int position) {
-
-            }
-        };
+        return new ShopAdapter(new ArrayList<Shop>(), getContext());
     }
 
     @Override
@@ -75,6 +72,7 @@ public class HomeFragment extends PagedFragment {
             @Override
             public void onSuccess(List<Shop> shops) {
                 if (!CollectionUtils.isEmpty(shops)) {
+                    recyclerAdapter.appendData(shops);
                     pageDelegate.onLoaded(-1, shops.size());
                 } else {
                     pageDelegate.onError();
@@ -94,31 +92,41 @@ public class HomeFragment extends PagedFragment {
         homeRepository.getHorizontalBanners(new DataCallback<List<HorizontalBanner>>() {
             @Override
             public void onSuccess(List<HorizontalBanner> horizontalBanners) {
-
+                if (!CollectionUtils.isEmpty(horizontalBanners)) {
+                    horizontalBannerView.setAdapter(new HorizontalBannerAdapter(horizontalBanners, getContext()));
+                    horizontalBannerView.setVisibility(View.VISIBLE);
+                } else {
+                    horizontalBannerView.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onFailure(int code, MyNetException e) {
-
+                horizontalBannerView.setVisibility(View.GONE);
             }
         });
 
         homeRepository.getVerticalBanners(new DataCallback<List<VerticalBanner>>() {
             @Override
             public void onSuccess(List<VerticalBanner> verticalBanners) {
-
+                if (!CollectionUtils.isEmpty(verticalBanners)) {
+                    verticalBannerView.setVisibility(View.VISIBLE);
+                    verticalBannerView.setAdapter(new VerticalBannerAdapter(getContext(), verticalBanners));
+                } else {
+                    verticalBannerView.setVisibility(View.GONE);
+                }
             }
 
             @Override
             public void onFailure(int code, MyNetException e) {
-
+                verticalBannerView.setVisibility(View.GONE);
             }
         });
 
         homeRepository.getCards(new DataCallback<List<Card>>() {
             @Override
             public void onSuccess(List<Card> cards) {
-
+                
             }
 
             @Override

@@ -1,6 +1,7 @@
 package com.example.imagefetcher;
 
 import android.content.Context;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
 import com.example.network.HttpClient;
@@ -8,6 +9,7 @@ import com.example.network.HttpClient;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -18,6 +20,7 @@ public class ImageFetcher {
     private ExecutorService executor;
     private HttpClient httpClient;
     private Dispatcher dispatcher;
+    private Map<ImageView, ViewTreeObserver.OnPreDrawListener> viewOnPreDrawListenerMap = new ConcurrentHashMap<>();
 
     private ImageFetcher(Builder builder) {
         this.context = builder.context;
@@ -29,10 +32,6 @@ public class ImageFetcher {
         imageCache = new ImageCache(builder.memMaxSize, builder.diskMaxSize, diskCacheDir, executor);
         httpClient = builder.httpClient;
         dispatcher = new Dispatcher(this);
-    }
-
-    public static ImageFetcher getInstance() {
-        return new ImageFetcher(null);
     }
 
     public ImageCache getImageCache() {
@@ -49,6 +48,14 @@ public class ImageFetcher {
 
     public HttpClient getHttpClient() {
         return httpClient;
+    }
+
+    public Map<ImageView, ViewTreeObserver.OnPreDrawListener> getViewOnPreDrawListenerMap() {
+        return viewOnPreDrawListenerMap;
+    }
+
+    public LoadInfo.Builder load(String url) {
+        return new LoadInfo.Builder(dispatcher, this).url(url);
     }
 
     public static class Builder {

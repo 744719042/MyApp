@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.base.utils.CollectionUtils;
 import com.example.injection.GlobalModuleRegistry;
 import com.example.injection.Injector;
 import com.example.injection.Module;
@@ -27,7 +28,9 @@ public abstract class BaseFragment extends Fragment {
     protected void initArgs(Bundle arguments) {
         List<Module> list = new ArrayList<>();
         list.addAll(GlobalModuleRegistry.getGlobalModuleRegistry().getGlobalModules());
-        list.addAll(getModules());
+        if (CollectionUtils.isEmpty(getModules())) {
+            list.addAll(getModules());
+        }
         Injector injector = new Injector(list.toArray(new Module[0]));
         injector.inject(this);
     }

@@ -95,4 +95,8 @@ public class NetworkWrapper {
             }
         });
     }
+
+    public HttpClient getHttpClient() {
+        return httpClient;
+    }
 }

@@ -2,7 +2,11 @@ package com.example.imagefetcher;
 
 import android.net.Uri;
 import android.text.TextUtils;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
+
+import java.util.Map;
 
 public class LoadInfo {
     private int resourceId;
@@ -18,6 +22,16 @@ public class LoadInfo {
     // 标识一次加载
     private String key;
     private Object tag;
+
+    public LoadInfo(Builder builder) {
+        this.resourceId = builder.resId;
+        this.error = builder.error;
+        this.imageView = builder.imageView;
+        this.loadListener = builder.loadListener;
+        this.placeholder = builder.placeHolder;
+        this.uri = builder.uri;
+        this.tag = builder.tag;
+    }
 
     public int getResourceId() {
         return resourceId;
@@ -77,5 +91,104 @@ public class LoadInfo {
 
     public int getTargetHeight() {
         return targetHeight;
+    }
+
+    private void setTargetSize(int width, int height) {
+        this.targetWidth = width;
+        this.targetHeight = height;
+    }
+
+    public static class Builder {
+        private ImageView imageView;
+        private BitmapLoadListener loadListener;
+        private int placeHolder;
+        private int error;
+        private Uri uri;
+        private int resId;
+        private Object tag;
+        private Dispatcher dispatcher;
+        private ImageFetcher imageFetcher;
+
+        public Builder(Dispatcher dispatcher, ImageFetcher imageFetcher) {
+            this.dispatcher = dispatcher;
+            this.imageFetcher = imageFetcher;
+        }
+
+        public Builder url(String url){
+            uri = Uri.parse(url);
+            return this;
+        }
+
+        public Builder placeHolder(int placeHolder) {
+            this.placeHolder = placeHolder;
+            return this;
+        }
+
+        public Builder error(int error) {
+            this.error = error;
+            return this;
+        }
+
+        public Builder tag(Object tag) {
+            this.tag = tag;
+            return this;
+        }
+
+        public void into(final ImageView imageView) {
+            this.imageView = imageView;
+            ViewGroup.LayoutParams params = imageView.getLayoutParams();
+            if (params != null) {
+                int width = params.width;
+                int height = params.height;
+
+                if (width > 0 && height > 0) {
+                    LoadInfo loadInfo = new LoadInfo(this);
+                    loadInfo.setTargetSize(width, height);
+                    dispatcher.submit(loadInfo);
+                    return;
+                }
+
+                width = imageView.getWidth();
+                height = imageView.getHeight();
+                if (width > 0 && height > 0) {
+                    LoadInfo loadInfo = new LoadInfo(this);
+                    loadInfo.setTargetSize(width, height);
+                    dispatcher.submit(loadInfo);
+                    return;
+                }
+            }
+
+            final Map<ImageView, ViewTreeObserver.OnPreDrawListener> map = imageFetcher.getViewOnPreDrawListenerMap();
+            ViewTreeObserver.OnPreDrawListener layoutListener = map.remove(imageView);
+            if (layoutListener != null) {
+                imageView.getViewTreeObserver().removeOnPreDrawListener(layoutListener);
+            }
+            layoutListener = new ViewTreeObserver.OnPreDrawListener() {
+                @Override
+                public boolean onPreDraw() {
+                    int width = imageView.getWidth();
+                    int height = imageView.getHeight();
+                    if (width > 0 && height > 0) {
+                        LoadInfo loadInfo = new LoadInfo(Builder.this);
+                        loadInfo.setTargetSize(width, height);
+                        dispatcher.submit(loadInfo);
+                    }
+                    ViewTreeObserver.OnPreDrawListener listener = map.remove(imageView);
+                    if (listener != this) {
+                        map.put(imageView, listener);
+                    }
+                    imageView.getViewTreeObserver().removeOnPreDrawListener(this);
+                    return false;
+                }
+            };
+            map.put(imageView, layoutListener);
+            imageView.getViewTreeObserver().addOnPreDrawListener(layoutListener);
+        }
+
+        public void into(BitmapLoadListener loadListener) {
+            this.loadListener = loadListener;
+            LoadInfo loadInfo = new LoadInfo(this);
+            dispatcher.submit(loadInfo);
+        }
     }
 }

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.base.utils.CollectionUtils;
 import com.example.injection.GlobalModuleRegistry;
 import com.example.injection.Injector;
 import com.example.injection.Module;
@@ -30,7 +31,9 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void initArgs(Intent intent) {
         List<Module> list = new ArrayList<>();
         list.addAll(GlobalModuleRegistry.getGlobalModuleRegistry().getGlobalModules());
-        list.addAll(getModules());
+        if (!CollectionUtils.isEmpty(getModules())) {
+            list.addAll(getModules());
+        }
         Injector injector = new Injector(list.toArray(new Module[0]));
         injector.inject(this);
     }

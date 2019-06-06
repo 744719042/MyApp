@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.example.home.R;
 import com.example.home.model.VerticalBanner;
+import com.example.imagefetcher.ImageFetcher;
+import com.example.provider.ImageFetcherProvider;
 
 import java.util.List;
 
@@ -53,8 +55,9 @@ public class VerticalBannerAdapter extends BaseAdapter {
             convertView.setTag(viewHolder);
         }
 
-        // TODO
         VerticalBanner verticalBanner = getItem(position);
+        ImageFetcher imageFetcher = ImageFetcherProvider.getInstance().getImageFetcher();
+        imageFetcher.load(verticalBanner.getUrl()).placeHolder(R.drawable.home_place_holder).into(viewHolder.imageView);
         viewHolder.title.setText(verticalBanner.getName());
         viewHolder.subTitle.setText(verticalBanner.getDesc());
         return convertView;

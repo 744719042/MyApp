@@ -1,18 +1,21 @@
 package com.example.home.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.example.home.R;
 import com.example.home.model.HorizontalBanner;
+import com.example.imagefetcher.ImageFetcher;
+import com.example.provider.ImageFetcherProvider;
 
 import java.util.List;
 
-public class HorizontalBannerAdapter extends BaseAdapter {
+public class HorizontalBannerAdapter extends PagerAdapter {
     private List<HorizontalBanner> bannerList;
     private Context context;
     private LayoutInflater inflater;
@@ -29,32 +32,24 @@ public class HorizontalBannerAdapter extends BaseAdapter {
     }
 
     @Override
-    public HorizontalBanner getItem(int position) {
-        return bannerList.get(position);
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
+        return view == o;
     }
 
+    @NonNull
     @Override
-    public long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder = null;
-        if (convertView != null) {
-            viewHolder = (ViewHolder) convertView.getTag();
-        } else {
-            viewHolder = new ViewHolder();
-            convertView = inflater.inflate(R.layout.home_horizontal_banner_view, parent, false);
-            viewHolder.imageView = convertView.findViewById(R.id.image);
-            convertView.setTag(viewHolder);
-        }
-
-        // TODO
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        View convertView = inflater.inflate(R.layout.home_horizontal_banner_view, container, false);
+        ImageView imageView = convertView.findViewById(R.id.image);
+        container.addView(convertView);
+        HorizontalBanner horizontalBanner = bannerList.get(position);
+        ImageFetcher imageFetcher = ImageFetcherProvider.getInstance().getImageFetcher();
+        imageFetcher.load(horizontalBanner.getUrl()).placeHolder(R.drawable.home_place_holder).into(imageView);
         return convertView;
     }
 
-    private static class ViewHolder {
-        ImageView imageView;
+    @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        container.removeView((View) object);
     }
 }

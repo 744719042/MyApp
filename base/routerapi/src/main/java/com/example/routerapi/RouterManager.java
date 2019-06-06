@@ -103,6 +103,10 @@ public class RouterManager {
         return mFilters;
     }
 
+    public RouterRequest.Builder with(String path) {
+        return new RouterRequest.Builder(path);
+    }
+
     public Object navigate(RouterRequest request) {
         return RouterDispatcherHelper.dispatch(request);
     }
