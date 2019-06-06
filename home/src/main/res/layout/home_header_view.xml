@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.example.base.widget.HorizontalBannerView
+        android:id="@+id/horizontal_banner_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+    </com.example.base.widget.HorizontalBannerView>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/home_grid_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <com.example.base.widget.VerticalBannerView
+        android:id="@+id/vertical_banner_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.example.base.widget.VerticalBannerView>
+
+    <com.example.base.widget.custom.AbNormalLayout
+        android:id="@+id/home_abnormal_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.example.base.widget.custom.AbNormalLayout>
+
+    <ImageView
+        android:id="@+id/banner_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

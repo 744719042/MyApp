@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center_horizontal"
+    android:layout_width="115dp"
+    android:layout_height="143dp">
+
+    <ImageView
+        android:id="@+id/card_bg"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/title"
+            tools:src="@drawable/takeout_icon_meituan_express_delivery"
+            android:layout_marginTop="15dp"
+            tools:visibility="gone"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:layout_width="wrap_content"
+            android:layout_height="15dp" />
+
+        <TextView
+            android:id="@+id/text_title"
+            tools:text="新用户专饷"
+            android:textColor="@color/takeout_black"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/sub_title"
+            tools:text="第一波12点开始抢"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="0.5dp"
+            android:paddingBottom="0.5dp"
+            android:textColor="@color/takeout_text_color_black"
+            android:textSize="11sp"
+            android:layout_marginTop="1dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_marginTop="1.5dp"
+            tools:src="@drawable/takeout_account_ic_oauth_qq"
+            android:layout_width="90dp"
+            android:layout_height="90dp" />
+    </LinearLayout>
+
+    <include layout="@layout/takeout_count_down_timer"
+        android:id="@+id/timer"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6.5dp" />
+</FrameLayout>
