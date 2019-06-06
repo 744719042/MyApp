@@ -2,11 +2,17 @@ package com.example.home.ui.fragment;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.example.base.recycler.BaseRecyclerAdapter;
 import com.example.base.recycler.BaseRecyclerViewHolder;
 import com.example.base.ui.PagedFragment;
+import com.example.base.widget.HorizontalBannerView;
+import com.example.base.widget.VerticalBannerView;
+import com.example.base.widget.custom.AbNormalLayout;
 import com.example.home.HomeModule;
 import com.example.home.R;
 import com.example.home.model.Card;
@@ -28,11 +34,24 @@ public class HomeFragment extends PagedFragment {
 
     @Inject
     private HomeRepository homeRepository;
+    private ViewGroup headerView;
+    private HorizontalBannerView horizontalBannerView;
+    private RecyclerView gridLayout;
+    private VerticalBannerView verticalBannerView;
+    private AbNormalLayout abNormalLayout;
+    private ImageView bannnerView;
 
     @Override
     protected void initViews(View view) {
         super.initViews(view);
-
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        headerView = (ViewGroup) inflater.inflate(R.layout.home_header_view, recyclerView, false);
+        recyclerView.addHeaderView(headerView);
+        horizontalBannerView = headerView.findViewById(R.id.horizontal_banner_view);
+        gridLayout = headerView.findViewById(R.id.home_grid_layout);
+        verticalBannerView = headerView.findViewById(R.id.vertical_banner_view);
+        abNormalLayout = headerView.findViewById(R.id.home_abnormal_layout);
+        bannnerView = headerView.findViewById(R.id.banner_view);
     }
 
     @Override

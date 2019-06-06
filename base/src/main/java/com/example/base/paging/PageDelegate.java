@@ -10,7 +10,7 @@ import com.example.base.recycler.BaseRecyclerView;
 
 public class PageDelegate extends RecyclerView.OnScrollListener {
     private PageIterator pageIterator;
-    private RecyclerView recyclerView;
+    private BaseRecyclerView recyclerView;
     private Activity activity;
     private BaseRecyclerAdapter adapter;
     private boolean mLoading = false;
@@ -25,7 +25,7 @@ public class PageDelegate extends RecyclerView.OnScrollListener {
         this.recyclerView.setAdapter(adapter);
     }
 
-    public RecyclerView getRecyclerView() {
+    public BaseRecyclerView getRecyclerView() {
         return recyclerView;
     }
 

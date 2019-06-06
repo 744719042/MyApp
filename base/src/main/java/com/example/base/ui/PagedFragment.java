@@ -9,6 +9,7 @@ import com.example.base.R;
 import com.example.base.paging.PageDelegate;
 import com.example.base.paging.PageLoader;
 import com.example.base.recycler.BaseRecyclerAdapter;
+import com.example.base.recycler.BaseRecyclerView;
 import com.example.base.widget.PullRefreshView;
 
 public abstract class PagedFragment extends BaseFragment implements PageLoader, PullRefreshView.RefreshListener {
@@ -17,6 +18,7 @@ public abstract class PagedFragment extends BaseFragment implements PageLoader, 
     protected PullRefreshView pullRefreshView;
     protected NPEDelegate npeDelegate;
     protected FrameLayout contentView;
+    protected BaseRecyclerView recyclerView;
 
     @Override
     protected void initData() {
@@ -34,6 +36,7 @@ public abstract class PagedFragment extends BaseFragment implements PageLoader, 
         pageDelegate = new PageDelegate(getActivity(), getLayoutManager(), recyclerAdapter, this);
         pullRefreshView = view.findViewById(R.id.activity_pull_refresh_root);
         pullRefreshView.setRefreshListener(this);
+        recyclerView = pageDelegate.getRecyclerView();
         pullRefreshView.addView(pageDelegate.getRecyclerView(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
 
         contentView = view.findViewById(R.id.activity_content);

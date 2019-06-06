@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.imagefetcher.ImageFetcher;
+
 public class BaseRecyclerViewHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> mViews;
 
@@ -51,7 +53,7 @@ public class BaseRecyclerViewHolder extends RecyclerView.ViewHolder {
 
     public void setImageUrl(@IdRes int id, String url, @DrawableRes int placeholder) {
         ImageView imageView = getView(id);
-
+        // TODO
     }
 
     public void setOnClickListener(@IdRes int id, View.OnClickListener onClickListener) {
