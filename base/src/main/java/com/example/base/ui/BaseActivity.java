@@ -5,6 +5,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.injection.GlobalModuleRegistry;
+import com.example.injection.Injector;
+import com.example.injection.Module;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
@@ -20,7 +27,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         initData();
     }
 
-    protected abstract void initArgs(Intent intent);
+    protected void initArgs(Intent intent) {
+        List<Module> list = new ArrayList<>();
+        list.addAll(GlobalModuleRegistry.getGlobalModuleRegistry().getGlobalModules());
+        list.addAll(getModules());
+        Injector injector = new Injector(list.toArray(new Module[0]));
+        injector.inject(this);
+    }
 
     public abstract int getLayoutResource();
 
@@ -28,4 +41,5 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void initData();
 
+    public abstract List<? extends Module> getModules();
 }

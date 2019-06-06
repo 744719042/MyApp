@@ -7,6 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.injection.GlobalModuleRegistry;
+import com.example.injection.Injector;
+import com.example.injection.Module;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class BaseFragment extends Fragment {
 
     @Override
@@ -17,7 +24,13 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    protected abstract void initArgs(Bundle arguments);
+    protected void initArgs(Bundle arguments) {
+        List<Module> list = new ArrayList<>();
+        list.addAll(GlobalModuleRegistry.getGlobalModuleRegistry().getGlobalModules());
+        list.addAll(getModules());
+        Injector injector = new Injector(list.toArray(new Module[0]));
+        injector.inject(this);
+    }
 
     @Nullable
     @Override
@@ -42,4 +55,6 @@ public abstract class BaseFragment extends Fragment {
     protected abstract void initViews(View view);
 
     public abstract int getLayoutResource();
+
+    public abstract List<? extends Module> getModules();
 }

@@ -11,11 +11,11 @@ import com.example.base.recycler.BaseRecyclerAdapter;
 import com.example.base.widget.PullRefreshView;
 
 public abstract class PagedActivity<T> extends BaseActivity implements PageLoader, PullRefreshView.RefreshListener {
-    private PageDelegate pageDelegate;
-    private NPEDelegate npeDelegate;
-    private BaseRecyclerAdapter<T> recyclerAdapter;
-    private PullRefreshView pullRefreshView;
-    private FrameLayout contentView;
+    protected PageDelegate pageDelegate;
+    protected NPEDelegate npeDelegate;
+    protected BaseRecyclerAdapter<T> recyclerAdapter;
+    protected PullRefreshView pullRefreshView;
+    protected FrameLayout contentView;
 
     @Override
     public int getLayoutResource() {
@@ -38,11 +38,11 @@ public abstract class PagedActivity<T> extends BaseActivity implements PageLoade
         return R.layout.base_loading_layout;
     }
 
-    private int getErrorLayoutRes() {
+    protected int getErrorLayoutRes() {
         return R.layout.base_error_layout;
     }
 
-    public int getEmptyLayoutRes() {
+    protected int getEmptyLayoutRes() {
         return R.layout.base_empty_layout;
     }
 

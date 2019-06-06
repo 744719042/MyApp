@@ -12,11 +12,11 @@ import com.example.base.recycler.BaseRecyclerAdapter;
 import com.example.base.widget.PullRefreshView;
 
 public abstract class PagedFragment extends BaseFragment implements PageLoader, PullRefreshView.RefreshListener {
-    private PageDelegate pageDelegate;
-    private BaseRecyclerAdapter recyclerAdapter;
-    private PullRefreshView pullRefreshView;
-    private NPEDelegate npeDelegate;
-    private FrameLayout contentView;
+    protected PageDelegate pageDelegate;
+    protected BaseRecyclerAdapter recyclerAdapter;
+    protected PullRefreshView pullRefreshView;
+    protected NPEDelegate npeDelegate;
+    protected FrameLayout contentView;
 
     @Override
     protected void initData() {
@@ -25,7 +25,7 @@ public abstract class PagedFragment extends BaseFragment implements PageLoader, 
 
     @Override
     public void onRefresh() {
-        pageDelegate.refresh();
+        initData();
     }
 
     @Override
