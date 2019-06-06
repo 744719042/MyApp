@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Message;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.imagefetcher.utils.CollectionUtils;
@@ -20,6 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 
 public class Dispatcher {
+    private static final String TAG = "Dispatcher";
     private static final int MSG_SUBMIT_NEW_LOAD = 100;
     private static final int MSG_SUBMIT_LOAD_LIST = 101;
     private static final int MSG_CANCEL_TAG = 102;
@@ -120,21 +122,25 @@ public class Dispatcher {
             switch (msg.what) {
                 case MSG_SUBMIT_NEW_LOAD: {
                     LoadInfo info = (LoadInfo) msg.obj;
+                    Log.e(TAG, "MSG_SUBMIT_NEW_LOAD loadIno = " + info);
                     handleLoadInfo(info);
                     break;
                 }
                 case MSG_CANCEL_LOAD: {
                     LoadInfo info = (LoadInfo) msg.obj;
+                    Log.e(TAG, "MSG_CANCEL_LOAD loadIno = " + info);
                     handleCancelLoad(info);
                     break;
                 }
                 case MSG_COMPLETE_TASK: {
                     BitmapTask task = (BitmapTask) msg.obj;
+                    Log.e(TAG, "MSG_COMPLETE_TASK task = " + task);
                     handleSuccess(task);
                     break;
                 }
                 case MSG_FAIL_TASK: {
                     BitmapTask task = (BitmapTask) msg.obj;
+                    Log.e(TAG, "MSG_COMPLETE_TASK task = " + task);
                     handleFail(task);
                     break;
                 }

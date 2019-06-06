@@ -12,9 +12,10 @@
         android:layout_height="47dp"
         android:scaleType="fitXY" />
 
-    <android.support.v7.widget.Space
+    <ImageView
         android:id="@+id/divider"
         android:layout_centerHorizontal="true"
+        android:background="#ffffff"
         android:layout_below="@id/icon"
         android:layout_width="1dp"
         android:layout_height="8dp" />

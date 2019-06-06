@@ -12,8 +12,6 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.example.imagefetcher.ImageFetcher;
-
 public class BaseRecyclerViewHolder extends RecyclerView.ViewHolder {
     private SparseArray<View> mViews;
 

@@ -1,11 +1,14 @@
 package com.example.injection;
 
+import android.util.Log;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Map;
 
 public class ProviderAssembly {
+    private static final String TAG = "ProviderAssembly";
     private TrivalAssembly trivalAssembly;
     private Map<Key, Object> singletonMap;
 
@@ -20,6 +23,8 @@ public class ProviderAssembly {
             return singletonMap.get(key);
         }
 
+        Log.e(TAG, "key = " + key);
+        Log.e(TAG, "Binding = " + binding);
         List<Key> dependencies = binding.getDependencies();
         if (dependencies == null || dependencies.isEmpty()) {
             try {
@@ -39,7 +44,9 @@ public class ProviderAssembly {
             Class<?>[] paramTypes = new Class[dependencies.size()];
             for (int i = 0; i < objects.length; i++) {
                 Key dependencyKey = dependencies.get(i);
-                Binding dependencyBinding = binder.getBinding(key);
+                Log.e(TAG, "dependencyKey = " + dependencyKey);
+                Binding dependencyBinding = binder.getBinding(dependencyKey);
+                Log.e(TAG, "dependencyBinding = " + dependencyBinding);
                 if (dependencyBinding.getProvider() != null) {
                     objects[i] = assembly(dependencyKey, binder);
                 } else {

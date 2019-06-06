@@ -12,7 +12,7 @@ import com.example.imagefetcher.LoadInfo;
 public class ResourceLoader implements BitmapLoader {
     @Override
     public Bitmap load(LoadInfo loadInfo) {
-        Resources resources = ImageFetcher.getInstance().getContext().getResources();
+        Resources resources = loadInfo.getImageFetcher().getContext().getResources();
         Drawable drawable = resources.getDrawable(loadInfo.getResourceId());
         if (drawable == null) {
             return null;

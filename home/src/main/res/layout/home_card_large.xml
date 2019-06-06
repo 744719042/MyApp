@@ -17,7 +17,6 @@
 
         <ImageView
             android:id="@+id/image"
-            tools:src="@drawable/takeout_account_ic_oauth_qq"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginBottom="45dp"
@@ -32,7 +31,6 @@
             <ImageView
                 android:id="@+id/title"
                 tools:visibility="gone"
-                tools:src="@drawable/takeout_icon_meituan_express_delivery"
                 android:layout_marginTop="15dp"
                 android:layout_marginLeft="20dp"
                 android:adjustViewBounds="true"
@@ -46,7 +44,6 @@
                 android:ellipsize="end"
                 android:layout_marginLeft="20dp"
                 tools:text="新用户专饷"
-                android:textColor="@color/takeout_black"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:paddingRight="5dp"
@@ -66,19 +63,11 @@
                 android:paddingBottom="0.5dp"
                 android:layout_gravity="left"
                 tools:text="第一波12点开始抢"
-                android:textColor="@color/takeout_text_color_black"
                 android:layout_marginTop="4dp"
                 android:textSize="11sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-        <include layout="@layout/takeout_count_down_timer"
-            android:id="@+id/timer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|bottom"
-            android:layout_marginBottom="10dp" />
     </FrameLayout>
 </FrameLayout>

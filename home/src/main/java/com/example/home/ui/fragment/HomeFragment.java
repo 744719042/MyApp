@@ -1,5 +1,6 @@
 package com.example.home.ui.fragment;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,10 +15,12 @@ import com.example.base.widget.VerticalBannerView;
 import com.example.base.widget.custom.AbNormalLayout;
 import com.example.home.HomeModule;
 import com.example.home.R;
+import com.example.home.adapter.CategoryAdapter;
 import com.example.home.adapter.HorizontalBannerAdapter;
 import com.example.home.adapter.ShopAdapter;
 import com.example.home.adapter.VerticalBannerAdapter;
 import com.example.home.model.Card;
+import com.example.home.model.Category;
 import com.example.home.model.HorizontalBanner;
 import com.example.home.model.Shop;
 import com.example.home.model.VerticalBanner;
@@ -67,21 +70,28 @@ public class HomeFragment extends PagedFragment {
     }
 
     @Override
-    public void loadNext(int page, int pageSize) {
+    public void loadNext(final int page, int pageSize) {
         homeRepository.getShopList(page, pageSize, new DataCallback<List<Shop>>() {
             @Override
             public void onSuccess(List<Shop> shops) {
                 if (!CollectionUtils.isEmpty(shops)) {
-                    recyclerAdapter.appendData(shops);
+                    if (page == 1) {
+                        recyclerAdapter.resetData(shops);
+                    } else {
+                        recyclerAdapter.appendData(shops);
+                    }
                     pageDelegate.onLoaded(-1, shops.size());
                 } else {
                     pageDelegate.onError();
                 }
+
+                pullRefreshView.notifyRefreshComplete();
             }
 
             @Override
             public void onFailure(int code, MyNetException e) {
                 pageDelegate.onError();
+                pullRefreshView.notifyRefreshComplete();
             }
         });
     }
@@ -95,8 +105,10 @@ public class HomeFragment extends PagedFragment {
                 if (!CollectionUtils.isEmpty(horizontalBanners)) {
                     horizontalBannerView.setAdapter(new HorizontalBannerAdapter(horizontalBanners, getContext()));
                     horizontalBannerView.setVisibility(View.VISIBLE);
+                    horizontalBannerView.resumePlay();
                 } else {
                     horizontalBannerView.setVisibility(View.GONE);
+                    horizontalBannerView.pausePlay();
                 }
             }
 
@@ -123,10 +135,16 @@ public class HomeFragment extends PagedFragment {
             }
         });
 
-        homeRepository.getCards(new DataCallback<List<Card>>() {
+        homeRepository.getCategories(new DataCallback<List<Category>>() {
             @Override
-            public void onSuccess(List<Card> cards) {
-                
+            public void onSuccess(List<Category> categories) {
+                if (!CollectionUtils.isEmpty(categories)) {
+                    gridLayout.setVisibility(View.VISIBLE);
+                    gridLayout.setLayoutManager(new GridLayoutManager(getContext(), 4));
+                    gridLayout.setAdapter(new CategoryAdapter(categories, getContext()));
+                } else {
+                    gridLayout.setVisibility(View.GONE);
+                }
             }
 
             @Override
@@ -134,6 +152,32 @@ public class HomeFragment extends PagedFragment {
 
             }
         });
+
+//        homeRepository.getCards(new DataCallback<List<Card>>() {
+//            @Override
+//            public void onSuccess(List<Card> cards) {
+//
+//            }
+//
+//            @Override
+//            public void onFailure(int code, MyNetException e) {
+//
+//            }
+//        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        horizontalBannerView.resumePlay();
+        verticalBannerView.resumePlay();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        horizontalBannerView.pausePlay();
+        verticalBannerView.pausePlay();
     }
 
     @Override

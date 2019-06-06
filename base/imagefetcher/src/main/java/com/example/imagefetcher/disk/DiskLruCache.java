@@ -20,6 +20,9 @@ public class DiskLruCache {
     private DiskLruCache(long maxSize, File dir, DiskFileName diskFileName) {
         this.mMaxSize = maxSize;
         this.mDir = dir;
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
         this.mDiskFileName = diskFileName;
     }
 

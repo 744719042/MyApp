@@ -23,6 +23,8 @@ public class LoadInfo {
     private String key;
     private Object tag;
 
+    private ImageFetcher imageFetcher;
+
     public LoadInfo(Builder builder) {
         this.resourceId = builder.resId;
         this.error = builder.error;
@@ -31,6 +33,7 @@ public class LoadInfo {
         this.placeholder = builder.placeHolder;
         this.uri = builder.uri;
         this.tag = builder.tag;
+        this.imageFetcher = builder.imageFetcher;
     }
 
     public int getResourceId() {
@@ -55,6 +58,10 @@ public class LoadInfo {
 
     public BitmapLoadListener getLoadListener() {
         return loadListener;
+    }
+
+    public ImageFetcher getImageFetcher() {
+        return imageFetcher;
     }
 
     public String getKey() {
@@ -96,6 +103,24 @@ public class LoadInfo {
     private void setTargetSize(int width, int height) {
         this.targetWidth = width;
         this.targetHeight = height;
+    }
+
+    @Override
+    public String toString() {
+        return "LoadInfo{" +
+                "resourceId=" + resourceId +
+                ", uri=" + uri +
+                ", imageView=" + imageView +
+                ", loadListener=" + loadListener +
+                ", error=" + error +
+                ", placeholder=" + placeholder +
+                ", targetWidth=" + targetWidth +
+                ", targetHeight=" + targetHeight +
+                ", cancel=" + cancel +
+                ", key='" + key + '\'' +
+                ", tag=" + tag +
+                ", imageFetcher=" + imageFetcher +
+                '}';
     }
 
     public static class Builder {

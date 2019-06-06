@@ -74,7 +74,7 @@ public class Request {
         private Version protocolVersion = Version.HTTP_1_1;
         private HttpUrl url;
         private RequestMethod method;
-        private Poster.Type postType = Poster.Type.MAINTHREAD;
+        private Poster.Type postType = Poster.Type.BACKGROUND;
         private int retryCount = 0;
 
         public Builder() {
@@ -97,7 +97,7 @@ public class Request {
         }
 
         public Builder postType(Poster.Type postType) {
-            this.postType= postType;
+            this.postType = postType;
             return this;
         }
 

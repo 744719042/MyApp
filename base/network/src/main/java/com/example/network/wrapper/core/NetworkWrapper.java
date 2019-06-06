@@ -2,6 +2,7 @@ package com.example.network.wrapper.core;
 
 import com.example.network.Callback;
 import com.example.network.HttpClient;
+import com.example.network.MainThreadPoster;
 import com.example.network.MyNetException;
 import com.example.network.Request;
 import com.example.network.Response;
@@ -22,11 +23,13 @@ public class NetworkWrapper {
     private String baseHost;
     private HttpClient httpClient;
     private Gson gson;
+    private MainThreadPoster mainThreadPoster;
 
     public NetworkWrapper(String baseHost, HttpClient httpClient, Gson gson) {
         this.baseHost = baseHost;
         this.httpClient = httpClient;
         this.gson = gson;
+        this.mainThreadPoster = new MainThreadPoster();
     }
 
     public <T> T create(Class<T> tClass) {
@@ -72,15 +75,20 @@ public class NetworkWrapper {
         httpClient.enqueue(request, new Callback() {
             @Override
             public void onSuccess(Response response) {
-                ParameterizedType parameterizedType = (ParameterizedType) callback.getClass().getGenericSuperclass();
+                ParameterizedType parameterizedType = (ParameterizedType) callback.getClass().getGenericInterfaces()[0];
                 Type type = parameterizedType.getActualTypeArguments()[0];
                 String body = null;
                 try {
                     body = response.getResponseBody().string();
-                    T data = gson.fromJson(body, type);
-                    if (callback != null) {
-                        callback.onSuccess(data);
-                    }
+                    final T data = gson.fromJson(body, type);
+                    mainThreadPoster.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (callback != null) {
+                                callback.onSuccess(data);
+                            }
+                        }
+                    });
                 } catch (IOException e) {
                     e.printStackTrace();
                     onFailure(-1, new MyNetException("", e));
@@ -88,10 +96,15 @@ public class NetworkWrapper {
             }
 
             @Override
-            public void onFailure(int code, MyNetException e) {
-                if (callback != null) {
-                    callback.onFailure(code, e);
-                }
+            public void onFailure(final int code, final MyNetException e) {
+                mainThreadPoster.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (callback != null) {
+                            callback.onFailure(code, e);
+                        }
+                    }
+                });
             }
         });
     }

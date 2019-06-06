@@ -148,6 +148,7 @@ public class HorizontalBannerView extends FrameLayout {
         if (!hasAdapter()) {
             return;
         }
+        removeCallbacks(mPlayRunnable);
         postDelayed(mPlayRunnable, 3000);
         invalidate();
     }

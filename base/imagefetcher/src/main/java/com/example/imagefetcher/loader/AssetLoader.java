@@ -13,7 +13,7 @@ import java.io.InputStream;
 public class AssetLoader implements BitmapLoader {
     @Override
     public Bitmap load(LoadInfo loadInfo) {
-        AssetManager assetManager = ImageFetcher.getInstance().getContext().getAssets();
+        AssetManager assetManager = loadInfo.getImageFetcher().getContext().getAssets();
         InputStream inputStream = null;
         try {
             inputStream = assetManager.open(loadInfo.getUri().toString());

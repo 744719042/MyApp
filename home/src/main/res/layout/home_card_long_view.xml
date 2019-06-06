@@ -17,7 +17,6 @@
 
         <ImageView
             android:id="@+id/image"
-            tools:src="@drawable/takeout_account_ic_oauth_qq"
             android:layout_gravity="center_vertical|right"
             android:layout_width="100dp"
             android:layout_height="match_parent" />
@@ -29,7 +28,6 @@
 
             <ImageView
                 android:id="@+id/title"
-                tools:src="@drawable/takeout_icon_meituan_express_delivery"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
                 android:layout_width="wrap_content"
@@ -41,7 +39,6 @@
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:paddingRight="5dp"
-                android:textColor="@color/takeout_black"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:layout_width="wrap_content"
@@ -51,7 +48,6 @@
                 android:id="@+id/sub_title"
                 android:layout_marginTop="2dp"
                 tools:text="一大波优惠来袭"
-                android:textColor="@color/takeout_text_color_black"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:layout_marginRight="5dp"

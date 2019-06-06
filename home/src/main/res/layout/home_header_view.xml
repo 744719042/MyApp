@@ -7,7 +7,7 @@
     <com.example.base.widget.HorizontalBannerView
         android:id="@+id/horizontal_banner_view"
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="150dp">
 
     </com.example.base.widget.HorizontalBannerView>
 
@@ -34,6 +34,9 @@
 
     <ImageView
         android:id="@+id/banner_view"
+        android:src="@drawable/home_bottom_banner"
+        android:layout_margin="10dp"
+        android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="80dp" />
 </LinearLayout>

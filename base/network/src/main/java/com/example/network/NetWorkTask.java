@@ -10,6 +10,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.SocketTimeoutException;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.Map;
 
 import javax.net.ssl.HostnameVerifier;
@@ -86,10 +87,6 @@ public class NetWorkTask implements Runnable {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-                if (httpURLConnection != null) {
-                    httpURLConnection.disconnect();
-                }
             }
             return null;
         }
@@ -152,6 +149,7 @@ public class NetWorkTask implements Runnable {
                     response.setResponseBody(new ResponseBody(httpURLConnection.getInputStream()));
                     response.setHeaders(Headers.of(httpURLConnection));
                     notifySuccess(response);
+                    return;
                 } else if (code >= 300 && code < 400) {
                     String redirectUrl = httpURLConnection.getHeaderField("Location");
                     if (!TextUtils.isEmpty(redirectUrl)) {

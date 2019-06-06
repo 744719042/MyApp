@@ -2,6 +2,7 @@ package com.example.myapp;
 
 import android.os.Bundle;
 
+import com.example.base.permission.PermissionManager;
 import com.example.base.ui.BaseActivity;
 import com.example.home.ui.fragment.HomeFragment;
 import com.example.injection.Module;
@@ -15,12 +16,17 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null) {
+        if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.content_layout, new HomeFragment())
                     .commitAllowingStateLoss();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override

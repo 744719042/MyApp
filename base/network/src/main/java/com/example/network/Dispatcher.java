@@ -19,7 +19,7 @@ public class Dispatcher implements DispatcherCallback {
 
     public synchronized void enqueue(NetWorkTask task) {
         Request request = task.getRequest();
-        if (runningQueue.size() < MAX_REQUESTS && isPerHostFull(request.getUrl().getHost())) {
+        if (runningQueue.size() < MAX_REQUESTS && !isPerHostFull(request.getUrl().getHost())) {
             executor.execute(task);
         } else {
             readyQueue.add(task);

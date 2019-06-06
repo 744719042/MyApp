@@ -19,7 +19,7 @@ public class NetworkLoader implements BitmapLoader {
     @Override
     public Bitmap load(LoadInfo loadInfo) {
         final String url = loadInfo.getUri().toString();
-        final ImageCache imageCache = ImageFetcher.getInstance().getImageCache();
+        final ImageCache imageCache = loadInfo.getImageFetcher().getImageCache();
 
         Bitmap bitmap = imageCache.getMemoryCache(url);
         if (bitmap != null) {
@@ -35,16 +35,18 @@ public class NetworkLoader implements BitmapLoader {
         if (inputStream == null) {
             HttpUrl httpUrl = new HttpUrl(Uri.parse(url));
             Request request = new Request.Builder().url(httpUrl).get();
-            HttpClient httpClient = ImageFetcher.getInstance().getHttpClient();
+            HttpClient httpClient = loadInfo.getImageFetcher().getHttpClient();
             Response response = httpClient.execute(request);
             inputStream = response.getResponseBody().stream();
         }
 
         if (inputStream != null) {
             try {
-                imageCache.addDiskCache(url, inputStream);
                 bitmap = LoaderHelper.decodeStream(inputStream, loadInfo);
-                imageCache.addMemCache(loadInfo.getKey(), bitmap);
+                if (bitmap != null) {
+                    imageCache.addDiskCache(url, bitmap);
+                    imageCache.addMemCache(loadInfo.getKey(), bitmap);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

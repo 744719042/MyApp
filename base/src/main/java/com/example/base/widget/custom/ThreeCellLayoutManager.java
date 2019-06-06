@@ -5,7 +5,8 @@ import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.example.mycustomwidget.R;
+import com.example.base.R;
+
 
 public class ThreeCellLayoutManager extends BaseLayoutManager {
     @Override

@@ -20,15 +20,13 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            initArgs(getArguments());
-        }
+        initArgs(getArguments());
     }
 
     protected void initArgs(Bundle arguments) {
         List<Module> list = new ArrayList<>();
         list.addAll(GlobalModuleRegistry.getGlobalModuleRegistry().getGlobalModules());
-        if (CollectionUtils.isEmpty(getModules())) {
+        if (!CollectionUtils.isEmpty(getModules())) {
             list.addAll(getModules());
         }
         Injector injector = new Injector(list.toArray(new Module[0]));

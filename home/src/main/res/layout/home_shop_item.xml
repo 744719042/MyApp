@@ -16,7 +16,7 @@
         android:layout_height="60dp">
         <!-- 商家图片 -->
         <ImageView
-            android:id="@+id/iamge"
+            android:id="@+id/image"
             android:layout_width="80dp"
             android:layout_height="60dp"
             android:scaleType="centerCrop" />
@@ -56,6 +56,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginRight="6dp"
+                    style="@style/rating_bar_small"
                     android:clickable="false"
                     android:gravity="center_vertical"
                     android:isIndicator="true"

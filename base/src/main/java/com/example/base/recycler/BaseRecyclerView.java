@@ -58,6 +58,28 @@ public class BaseRecyclerView extends RecyclerView {
         }
     }
 
+    public void notifyHeaderViewChanged(View headerView) {
+        int index = mHeaders.indexOf(headerView);
+        if (index < 0) {
+            return;
+        }
+
+        if (mWrapperAdapter != null) {
+            mWrapperAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void notifyFooterViewChanged(View footerView) {
+        int index = mFooters.indexOf(footerView);
+        if (index < 0) {
+            return;
+        }
+
+        if (mWrapperAdapter != null) {
+            mWrapperAdapter.notifyDataSetChanged();
+        }
+    }
+
     public void addFooterView(View footerView) {
         mFooters.add(footerView);
         if (mWrapperAdapter != null) {

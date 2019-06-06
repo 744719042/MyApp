@@ -2,6 +2,8 @@ package com.example.network;
 
 import android.net.Uri;
 
+import java.net.URLDecoder;
+
 public class HttpUrl {
     private String schema;
     private String host;
@@ -18,7 +20,7 @@ public class HttpUrl {
         this.query = builder.query;
 
         Uri uri = new Uri.Builder().scheme(schema).authority(host + ":" + port).path(path).query(query).build();
-        url = uri.toString();
+        url = URLDecoder.decode(uri.toString());
     }
 
     public HttpUrl(Uri uri) {
@@ -27,6 +29,7 @@ public class HttpUrl {
         this.port = uri.getPort();
         this.path = uri.getPath();
         this.query = uri.getQuery();
+        url = URLDecoder.decode(uri.toString());
     }
 
     public String getUrl() {

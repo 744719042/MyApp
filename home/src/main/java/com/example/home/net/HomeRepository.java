@@ -1,6 +1,7 @@
 package com.example.home.net;
 
 import com.example.home.model.Card;
+import com.example.home.model.Category;
 import com.example.home.model.HorizontalBanner;
 import com.example.home.model.Shop;
 import com.example.home.model.VerticalBanner;
@@ -31,6 +32,11 @@ public class HomeRepository {
 
     public void getCards(DataCallback<List<Card>> dataCallback) {
         Request request = homeApi.getCards();
+        networkWrapper.enqueue(request, dataCallback);
+    }
+
+    public void getCategories(DataCallback<List<Category>> dataCallback) {
+        Request request = homeApi.getCategories();
         networkWrapper.enqueue(request, dataCallback);
     }
 

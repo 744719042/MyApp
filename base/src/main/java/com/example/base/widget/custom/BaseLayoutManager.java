@@ -3,7 +3,7 @@ package com.example.base.widget.custom;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.mycustomwidget.utils.NumUtils;
+import com.example.base.utils.NumUtils;
 
 public abstract class BaseLayoutManager implements ILayoutManager {
     protected float mAspect = 0.5f;

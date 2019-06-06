@@ -5,27 +5,21 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-import com.example.base.recycler.BaseRecyclerAdapter;
 import com.example.base.recycler.BaseRecyclerView;
 
 public class PageDelegate extends RecyclerView.OnScrollListener {
     private PageIterator pageIterator;
-    private BaseRecyclerView recyclerView;
-    private Activity activity;
-    private BaseRecyclerAdapter adapter;
+    private RecyclerView recyclerView;
     private boolean mLoading = false;
 
-    public PageDelegate(Activity activity, RecyclerView.LayoutManager layoutManager, BaseRecyclerAdapter adapter, PageLoader pageLoader) {
-        this.activity = activity;
-        this.adapter = adapter;
+    public PageDelegate(Activity activity, RecyclerView.LayoutManager layoutManager, PageLoader pageLoader) {
         this.pageIterator = new PageIterator(pageLoader);
         this.recyclerView = new BaseRecyclerView(activity);
         this.recyclerView.addOnScrollListener(this);
         this.recyclerView.setLayoutManager(layoutManager);
-        this.recyclerView.setAdapter(adapter);
     }
 
-    public BaseRecyclerView getRecyclerView() {
+    public RecyclerView getRecyclerView() {
         return recyclerView;
     }
 

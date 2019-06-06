@@ -64,7 +64,7 @@ public class ImageCache {
         }
     }
 
-    public void addDiskCache(String url, InputStream inputStream) {
+    public void addDiskCache(String url, Bitmap bitmap) {
         waitForDiskReady();
         if (diskLruCache.isFileExist(url)) {
             return;
@@ -73,11 +73,7 @@ public class ImageCache {
         OutputStream outputStream = null;
         try {
             outputStream = diskLruCache.newOutputStream(url);
-            int len = -1;
-            byte buf[] = new byte[1024];
-            while ((len = inputStream.read(buf)) != -1) {
-                outputStream.write(buf, 0, len);
-            }
+            bitmap.compress(Bitmap.CompressFormat.PNG, 90, outputStream);
             diskLruCache.commitOutputStream(url);
         } catch (IOException e) {
             e.printStackTrace();

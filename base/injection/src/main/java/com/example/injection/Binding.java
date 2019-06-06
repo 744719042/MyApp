@@ -62,4 +62,16 @@ public class Binding {
     public void setDependencies(List<Key> dependencies) {
         this.dependencies = dependencies;
     }
+
+    @Override
+    public String toString() {
+        return "Binding{" +
+                "isSingleton=" + isSingleton +
+                ", isEager=" + isEager +
+                ", targetClass=" + targetClass +
+                ", targetObject=" + targetObject +
+                ", provider=" + provider +
+                ", dependencies=" + dependencies +
+                '}';
+    }
 }

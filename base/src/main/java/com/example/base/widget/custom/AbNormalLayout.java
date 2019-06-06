@@ -98,6 +98,9 @@ public class AbNormalLayout extends ViewGroup {
 
     private void setupViews() {
         AbNormalAdapter adapter = mAdapter;
+        if (adapter == null) {
+            return;
+        }
         int count = adapter.getCount();
         int size = mDetachedViews.size();
         for (int i = 0; i < count; i++) {
@@ -190,6 +193,9 @@ public class AbNormalLayout extends ViewGroup {
     }
 
     private ILayoutManager getLayoutManager() {
+        if (mAdapter == null) {
+            return  null;
+        }
         int count = mAdapter.getCount();
         switch (count) {
             case 2: {

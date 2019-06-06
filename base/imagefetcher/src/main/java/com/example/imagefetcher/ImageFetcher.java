@@ -55,7 +55,8 @@ public class ImageFetcher {
     }
 
     public LoadInfo.Builder load(String url) {
-        return new LoadInfo.Builder(dispatcher, this).url(url);
+        String newUrl = "http://192.168.137.240:8080/HttpServer" + url;
+        return new LoadInfo.Builder(dispatcher, this).url(newUrl);
     }
 
     public static class Builder {

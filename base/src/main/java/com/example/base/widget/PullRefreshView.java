@@ -68,6 +68,15 @@ public class PullRefreshView extends FrameLayout {
         initViews();
     }
 
+    public void setContentView(ViewGroup contentView) {
+        addView(contentView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+        initViews();
+    }
+
+    public View getContentView() {
+        return mContentView;
+    }
+
     public void setRefreshListener(RefreshListener listener) {
         this.mRefreshListener = listener;
     }
@@ -85,10 +94,9 @@ public class PullRefreshView extends FrameLayout {
     }
 
     private void initViews() {
-//        if (getChildCount() != 1) {
-//            throw new IllegalArgumentException("子控件必须只有一个");
-//        }
-//        mHeaderView = getChildAt(0);
+        if (getChildCount() != 1) {
+            return;
+        }
         mContentView = getChildAt(0);
         LayoutParams contentParams = (LayoutParams) mContentView.getLayoutParams();
         contentParams.width = ViewGroup.LayoutParams.MATCH_PARENT;

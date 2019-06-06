@@ -1,9 +1,10 @@
 package com.example.injection;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GlobalModuleRegistry {
-    private List<Module> modules;
+    private List<Module> modules = new ArrayList<>();
 
     private GlobalModuleRegistry() {
     }

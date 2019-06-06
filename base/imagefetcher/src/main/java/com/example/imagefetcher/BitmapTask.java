@@ -1,6 +1,7 @@
 package com.example.imagefetcher;
 
 import android.graphics.Bitmap;
+import android.util.Log;
 
 import com.example.imagefetcher.loader.BitmapLoader;
 import com.example.imagefetcher.loader.LoaderHelper;
@@ -11,7 +12,7 @@ import java.util.List;
 import java.util.concurrent.Future;
 
 public class BitmapTask implements Runnable {
-
+    private static final String TAG = "BitmapTask";
     Future<?> future;
     LoadInfo loadInfo;
     List<LoadInfo> otherLoadInfo;
@@ -26,14 +27,23 @@ public class BitmapTask implements Runnable {
     @Override
     public void run() {
         BitmapLoader bitmapLoader = LoaderHelper.findLoader(loadInfo);
+        Log.e(TAG, "bitmaploader = " + bitmapLoader);
+
         if (bitmapLoader != null) {
-            result = bitmapLoader.load(loadInfo);
+            try {
+                result = bitmapLoader.load(loadInfo);
+                Log.e(TAG, "result = " + result);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         if (result != null) {
             dispatcher.complete(this);
+            Log.e(TAG, "complete = " + result);
         } else {
             dispatcher.fail(this);
+            Log.e(TAG, "fail = " + result);
         }
     }
 

@@ -23,6 +23,7 @@ public class VerticalBannerView extends FrameLayout {
         public void run() {
             current = (current + 1) % adapter.getCount();
             View newView = adapter.getView(current, recycleView, VerticalBannerView.this);
+            recycleView.setVisibility(View.VISIBLE);
             ObjectAnimator hide = ObjectAnimator.ofFloat(currentView, "translationY", 0, -recycleView.getHeight());
             ObjectAnimator show = ObjectAnimator.ofFloat(newView, "translationY", newView.getHeight(), 0);
             AnimatorSet animatorSet = new AnimatorSet();
@@ -62,6 +63,7 @@ public class VerticalBannerView extends FrameLayout {
         currentView = adapter.getView(0, null, this);
         recycleView = adapter.getView(1, null, this);
         current = 0;
+        recycleView.setVisibility(View.INVISIBLE);
         addView(recycleView);
         addView(currentView);
     }

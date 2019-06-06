@@ -8,6 +8,7 @@ import com.example.base.R;
 import com.example.base.paging.PageDelegate;
 import com.example.base.paging.PageLoader;
 import com.example.base.recycler.BaseRecyclerAdapter;
+import com.example.base.recycler.BaseRecyclerView;
 import com.example.base.widget.PullRefreshView;
 
 public abstract class PagedActivity<T> extends BaseActivity implements PageLoader, PullRefreshView.RefreshListener {
@@ -16,6 +17,7 @@ public abstract class PagedActivity<T> extends BaseActivity implements PageLoade
     protected BaseRecyclerAdapter<T> recyclerAdapter;
     protected PullRefreshView pullRefreshView;
     protected FrameLayout contentView;
+    private BaseRecyclerView recyclerView;
 
     @Override
     public int getLayoutResource() {
@@ -24,14 +26,16 @@ public abstract class PagedActivity<T> extends BaseActivity implements PageLoade
 
     @Override
     protected void initViews() {
-        recyclerAdapter = createAdapter();
-        pageDelegate = new PageDelegate(this, getLayoutManager(), recyclerAdapter, this);
-        pullRefreshView = findViewById(R.id.activity_pull_refresh_root);
-        pullRefreshView.setRefreshListener(this);
-        pullRefreshView.addView(pageDelegate.getRecyclerView(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
-        contentView = findViewById(R.id.activity_content);
-        npeDelegate = new NPEDelegate(getErrorLayoutRes(), getEmptyLayoutRes(), getLoadingLayoutRes(), contentView);
+//        recyclerAdapter = createAdapter();
+//        pageDelegate = new PageDelegate(this, getLayoutManager(), this);
+//        pullRefreshView = findViewById(R.id.activity_pull_refresh_root);
+//        pullRefreshView.setRefreshListener(this);
+//        pullRefreshView.setContentView(pageDelegate.getRecyclerView());
+//        recyclerView = (BaseRecyclerView) pullRefreshView.getContentView();
+//        recyclerView.setAdapter(recyclerAdapter);
+//
+//        contentView = findViewById(R.id.activity_content);
+//        npeDelegate = new NPEDelegate(getErrorLayoutRes(), getEmptyLayoutRes(), getLoadingLayoutRes(), contentView);
     }
 
     protected int getLoadingLayoutRes() {

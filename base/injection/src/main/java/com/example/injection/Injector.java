@@ -1,5 +1,7 @@
 package com.example.injection;
 
+import android.util.Log;
+
 import java.lang.reflect.Field;
 import java.util.HashSet;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Injector {
+    private static final String TAG = "Injector";
     private Binder binder = new Binder();
     private Map<Key, Object> singletonMap = new ConcurrentHashMap<>();
     private TrivalAssembly trivalAssembly;
@@ -28,6 +31,8 @@ public class Injector {
                 initSingleInstance(entry.getKey());
             }
         }
+
+        Log.e(TAG, "bindingmap = " + bindings);
     }
 
     public Object getObject(Class<?> clazz) {

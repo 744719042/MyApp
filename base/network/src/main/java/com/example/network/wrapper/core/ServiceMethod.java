@@ -80,7 +80,7 @@ public class ServiceMethod {
 
     public Request getRequest(Object[] args) {
         parseParamAnnotations(args);
-        HttpUrl httpUrl = new HttpUrl.Builder().schema(protocol).host(host).path(path).query(query).build();
+        HttpUrl httpUrl = new HttpUrl.Builder().schema(protocol).host(host).port(8080).path(path).query(query).build();
         Request.Builder builder = new Request.Builder();
         builder.url(httpUrl);
         switch (method) {

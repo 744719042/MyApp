@@ -5,7 +5,10 @@ import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 
 import com.example.imagefetcher.LoadInfo;
+import com.example.network.IOUtils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 public class LoaderHelper {
@@ -23,7 +26,7 @@ public class LoaderHelper {
         }
 
         String url = info.getUri().toString();
-        if (TextUtils.isEmpty(url)) {
+        if (!TextUtils.isEmpty(url)) {
             if (url.startsWith("file:///android_assets/")) {
                 return ASSET_LOADER;
             } else if (url.startsWith("file://")) {
@@ -36,16 +39,24 @@ public class LoaderHelper {
         return null;
     }
 
-    public static Bitmap decodeStream(InputStream inputStream, LoadInfo loadInfo) {
+    public static Bitmap decodeStream(InputStream inputStream, LoadInfo loadInfo) throws IOException {
         int vwidth = loadInfo.getTargetWidth(), vheight = loadInfo.getTargetHeight();
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        int len = -1;
+        byte[] buf = new byte[1024];
+        while ((len = inputStream.read(buf)) != -1) {
+            bos.write(buf, 0, len);
+        }
+
+        byte[] data = bos.toByteArray();
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = true;
-        BitmapFactory.decodeStream(inputStream, null, options);
+        BitmapFactory.decodeByteArray(data, 0, data.length, options);
         int dwidth = options.outWidth, dheight = options.outHeight;
         int sampleSize = calcSampleSize(vwidth, vheight, dwidth, dheight);
         options.inJustDecodeBounds = false;
         options.inSampleSize = sampleSize;
-        return BitmapFactory.decodeStream(inputStream, null, options);
+        return BitmapFactory.decodeByteArray(data, 0, data.length, options);
     }
 
     private static int calcSampleSize(int vwidth, int vheight, int dwidth, int dheight) {

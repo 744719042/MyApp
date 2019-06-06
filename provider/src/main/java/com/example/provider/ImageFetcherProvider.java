@@ -10,7 +10,8 @@ public class ImageFetcherProvider {
         this.imageFetcher = new ImageFetcher.Builder()
                 .client(NetworkProvider.getInstance().getNetworkService().getHttpClient())
                 .context(BaseApplication.getContext())
-                .memMaxSize(50 * 1024 * 1024)
+                .memMaxSize(10 * 1024 * 1024)
+                .diskMaxSize(50 * 1024 * 1024)
                 .build();
     }
 

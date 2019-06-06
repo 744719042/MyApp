@@ -33,12 +33,12 @@ public abstract class PagedFragment extends BaseFragment implements PageLoader, 
     @Override
     protected void initViews(View view) {
         recyclerAdapter = createAdapter();
-        pageDelegate = new PageDelegate(getActivity(), getLayoutManager(), recyclerAdapter, this);
+        pageDelegate = new PageDelegate(getActivity(), getLayoutManager(), this);
         pullRefreshView = view.findViewById(R.id.activity_pull_refresh_root);
         pullRefreshView.setRefreshListener(this);
-        recyclerView = pageDelegate.getRecyclerView();
-        pullRefreshView.addView(pageDelegate.getRecyclerView(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-
+        pullRefreshView.setContentView(pageDelegate.getRecyclerView());
+        recyclerView = (BaseRecyclerView) pullRefreshView.getContentView();
+        recyclerView.setAdapter(recyclerAdapter);
         contentView = view.findViewById(R.id.activity_content);
         npeDelegate = new NPEDelegate(getErrorLayoutRes(), getEmptyLayoutRes(), getLoadingLayoutRes(), contentView);
     }

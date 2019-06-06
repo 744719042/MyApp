@@ -51,4 +51,12 @@ public class Key {
     public int hashCode() {
         return Objects.hash(clazz, name);
     }
+
+    @Override
+    public String toString() {
+        return "Key{" +
+                "clazz=" + clazz +
+                ", name=" + name +
+                '}';
+    }
 }
