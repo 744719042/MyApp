@@ -15,6 +15,7 @@ import com.example.base.widget.VerticalBannerView;
 import com.example.base.widget.custom.AbNormalLayout;
 import com.example.home.HomeModule;
 import com.example.home.R;
+import com.example.home.adapter.CardAdapter;
 import com.example.home.adapter.CategoryAdapter;
 import com.example.home.adapter.HorizontalBannerAdapter;
 import com.example.home.adapter.ShopAdapter;
@@ -153,17 +154,22 @@ public class HomeFragment extends PagedFragment {
             }
         });
 
-//        homeRepository.getCards(new DataCallback<List<Card>>() {
-//            @Override
-//            public void onSuccess(List<Card> cards) {
-//
-//            }
-//
-//            @Override
-//            public void onFailure(int code, MyNetException e) {
-//
-//            }
-//        });
+        homeRepository.getCards(new DataCallback<List<Card>>() {
+            @Override
+            public void onSuccess(List<Card> cards) {
+                if (!CollectionUtils.isEmpty(cards)) {
+                    abNormalLayout.setAdapter(new CardAdapter(getContext(), cards));
+                    abNormalLayout.setVisibility(View.VISIBLE);
+                } else {
+                    abNormalLayout.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onFailure(int code, MyNetException e) {
+                abNormalLayout.setVisibility(View.GONE);
+            }
+        });
     }
 
     @Override

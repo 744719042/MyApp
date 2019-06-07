@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.base.R;
 import com.example.base.utils.UIUtils;
+import com.example.imagefetcher.Dispatcher;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +19,13 @@ public class AbNormalLayout extends ViewGroup {
     private AbNormalAdapter mAdapter;
     private DataSetObserver mObserver;
     private ILayoutManager mLayoutManager;
-    private AttributeSet mAttributeSet;
     private int mCellPadding = UIUtils.dp2px(5);
     protected List<View> mDetachedViews = new ArrayList<>();
+    private static final float DEFAULT_ASPECT = 0.5f;
+    private float mFiveAspect = DEFAULT_ASPECT;
+    private float mFourAspect = DEFAULT_ASPECT;
+    private float mThreeAspect = DEFAULT_ASPECT;
+    private float mTwoAspect = DEFAULT_ASPECT;
 
     public AbNormalLayout(Context context) {
         this(context, null);
@@ -32,10 +37,13 @@ public class AbNormalLayout extends ViewGroup {
 
     public AbNormalLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        mAttributeSet = attrs;
         if (attrs != null) {
             TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.AbNormalLayout);
             mCellPadding = array.getDimensionPixelSize(R.styleable.AbNormalLayout_cellPadding, mCellPadding);
+            mTwoAspect = array.getFloat(R.styleable.AbNormalLayout_twoCardsAspect, mTwoAspect);
+            mThreeAspect = array.getFloat(R.styleable.AbNormalLayout_threeCardsAspect, mThreeAspect);
+            mFourAspect = array.getFloat(R.styleable.AbNormalLayout_fourCardsAspect, mFourAspect);
+            mFiveAspect = array.getFloat(R.styleable.AbNormalLayout_fiveCardsAspect, mFiveAspect);
             array.recycle();
         }
         init();
@@ -80,7 +88,7 @@ public class AbNormalLayout extends ViewGroup {
             width = UIUtils.getScreenWidth();
         }
 
-        setMeasuredDimension(width, mLayoutManager.onMeasure(width, getContext(), mAttributeSet));
+        setMeasuredDimension(width, mLayoutManager.onMeasure(width, getContext()));
     }
 
     @Override
@@ -167,6 +175,18 @@ public class AbNormalLayout extends ViewGroup {
         public LayoutParams(ViewGroup.LayoutParams source) {
             super(source);
         }
+
+        public void setWidthRatio(float mWidthRatio) {
+            this.mWidthRatio = mWidthRatio;
+        }
+
+        public void setHeightRatio(float mHeightRatio) {
+            this.mHeightRatio = mHeightRatio;
+        }
+
+        public void setAspect(float mAspect) {
+            this.mAspect = mAspect;
+        }
     }
 
     private void detachViews() {
@@ -202,23 +222,23 @@ public class AbNormalLayout extends ViewGroup {
                 if (mLayoutManager instanceof TwoCellLayoutManager) {
                     return mLayoutManager;
                 }
-                return new TwoCellLayoutManager();
+                return new TwoCellLayoutManager(mTwoAspect);
             }
             case 3:
                 if (mLayoutManager instanceof ThreeCellLayoutManager) {
                     return mLayoutManager;
                 }
-                return new ThreeCellLayoutManager();
+                return new ThreeCellLayoutManager(mThreeAspect);
             case 4:
                 if (mLayoutManager instanceof FourCellLayoutManager) {
                     return mLayoutManager;
                 }
-                return new FourCellLayoutManager();
+                return new FourCellLayoutManager(mFourAspect);
             case 5:
                 if (mLayoutManager instanceof FiveCellLayoutManager) {
                     return mLayoutManager;
                 }
-                return new FiveCellLayoutManager();
+                return new FiveCellLayoutManager(mFiveAspect);
         }
 
         return null;

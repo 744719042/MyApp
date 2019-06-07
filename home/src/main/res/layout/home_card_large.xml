@@ -2,8 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center_horizontal"
-    android:layout_width="140dp"
-    android:layout_height="220dp">
+    android:background="@color/home_white"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/card_bg"
@@ -11,63 +12,49 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/text_title"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="@color/home_main_text"
+            android:layout_marginLeft="20dp"
+            tools:text="新用户专饷"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:paddingRight="5dp"
+            android:layout_marginTop="12dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/sub_title"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="0.5dp"
+            android:paddingBottom="0.5dp"
+            android:layout_gravity="left"
+            tools:text="第一波12点开始抢"
+            android:layout_marginTop="4dp"
+            android:textSize="11sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginBottom="45dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="20dp"
             android:layout_gravity="center_horizontal|bottom" />
 
-        <LinearLayout
-            android:id="@+id/content"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/title"
-                tools:visibility="gone"
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="20dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:layout_width="wrap_content"
-                android:layout_height="15dp" />
-
-            <TextView
-                android:id="@+id/text_title"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:layout_marginLeft="20dp"
-                tools:text="新用户专饷"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:paddingRight="5dp"
-                android:layout_marginTop="12dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/sub_title"
-                android:singleLine="true"
-                android:ellipsize="end"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="5dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:paddingTop="0.5dp"
-                android:paddingBottom="0.5dp"
-                android:layout_gravity="left"
-                tools:text="第一波12点开始抢"
-                android:layout_marginTop="4dp"
-                android:textSize="11sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </LinearLayout>
-    </FrameLayout>
+    </LinearLayout>
 </FrameLayout>

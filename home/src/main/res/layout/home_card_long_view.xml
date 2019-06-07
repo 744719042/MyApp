@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/home_white"
     android:layout_height="80dp">
     <ImageView
         android:id="@+id/card_bg"
@@ -22,20 +23,16 @@
             android:layout_height="match_parent" />
 
         <LinearLayout
+            android:layout_gravity="center_vertical|left"
             android:orientation="vertical"
+            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/title"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                android:layout_width="wrap_content"
-                android:layout_height="15dp" />
 
             <TextView
                 android:id="@+id/text_title"
                 tools:text="优惠风暴"
+                android:textColor="@color/home_main_text"
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:paddingRight="5dp"

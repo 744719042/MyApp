@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -27,6 +28,14 @@
 
     <com.example.base.widget.custom.AbNormalLayout
         android:id="@+id/home_abnormal_layout"
+        app:cellPadding="2dp"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        android:background="#66999999"
+        app:fiveCardsAspect="0.65"
+        app:twoCardsAspect="0.3"
+        app:threeCardsAspect="0.4"
+        app:fourCardsAspect="0.65"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

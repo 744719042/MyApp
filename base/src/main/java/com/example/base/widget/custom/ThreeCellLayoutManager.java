@@ -1,22 +1,11 @@
 package com.example.base.widget.custom;
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.util.AttributeSet;
 import android.view.View;
 
-import com.example.base.R;
-
-
 public class ThreeCellLayoutManager extends BaseLayoutManager {
-    @Override
-    public int onMeasure(int width, Context context, AttributeSet attrs) {
-        if (attrs != null) {
-            TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.AbNormalLayout);
-            mAspect = array.getFloat(R.styleable.AbNormalLayout_threeCardsAspect, mAspect);
-            array.recycle();
-        }
-        return (int) (width * mAspect);
+
+    public ThreeCellLayoutManager(float mAspect) {
+        super(mAspect);
     }
 
     @Override

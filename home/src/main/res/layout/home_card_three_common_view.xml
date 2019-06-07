@@ -2,8 +2,9 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:gravity="center_horizontal"
-    android:layout_width="115dp"
-    android:layout_height="143dp">
+    android:background="@color/home_white"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/card_bg"
@@ -19,17 +20,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/title"
-            android:layout_marginTop="15dp"
-            tools:visibility="gone"
-            android:adjustViewBounds="true"
-            android:scaleType="fitXY"
-            android:layout_width="wrap_content"
-            android:layout_height="15dp" />
-
         <TextView
             android:id="@+id/text_title"
+            android:textColor="@color/home_main_text"
             tools:text="新用户专饷"
             android:singleLine="true"
             android:ellipsize="end"

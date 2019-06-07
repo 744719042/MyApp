@@ -1,21 +1,11 @@
 package com.example.base.widget.custom;
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.util.AttributeSet;
 import android.view.View;
 
-import com.example.base.R;
-
 public class FourCellLayoutManager extends BaseLayoutManager {
-    @Override
-    public int onMeasure(int width, Context context, AttributeSet attrs) {
-        if (attrs != null) {
-            TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.AbNormalLayout);
-            mAspect = array.getFloat(R.styleable.AbNormalLayout_fourCardsAspect, mAspect);
-            array.recycle();
-        }
-        return (int) (width * mAspect);
+
+    public FourCellLayoutManager(float mAspect) {
+        super(mAspect);
     }
 
     @Override
@@ -31,12 +21,11 @@ public class FourCellLayoutManager extends BaseLayoutManager {
         view = layout.getChildAt(1);
         view.layout(x, y, x + view.getMeasuredWidth(), y + view.getMeasuredHeight());
 
-        x = x + view.getMeasuredWidth() + cellPadding;
+        y = y + view.getMeasuredHeight() + cellPadding;
         view = layout.getChildAt(2);
         view.layout(x, y, x + view.getMeasuredWidth(), y + view.getMeasuredHeight());
 
-        x = x - view.getMeasuredWidth() - cellPadding;
-        y = y + view.getMeasuredHeight() + cellPadding;
+        x = x + view.getMeasuredWidth() + cellPadding;
         view = layout.getChildAt(3);
         view.layout(x, y, x + view.getMeasuredWidth(), y + view.getMeasuredHeight());
     }

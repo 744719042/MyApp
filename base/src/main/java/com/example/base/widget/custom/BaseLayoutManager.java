@@ -1,12 +1,22 @@
 package com.example.base.widget.custom;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.base.utils.NumUtils;
 
 public abstract class BaseLayoutManager implements ILayoutManager {
-    protected float mAspect = 0.5f;
+    protected float mAspect;
+
+    public BaseLayoutManager(float mAspect) {
+        this.mAspect = mAspect;
+    }
+
+    @Override
+    public int onMeasure(int width, Context context) {
+        return (int) (width * mAspect);
+    }
 
     protected void measure(View view, int width, int height) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();

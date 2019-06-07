@@ -1,23 +1,10 @@
 package com.example.base.widget.custom;
 
-import android.content.Context;
-import android.content.res.TypedArray;
-import android.util.AttributeSet;
 import android.view.View;
 
-import com.example.base.R;
-
 public class TwoCellLayoutManager extends BaseLayoutManager {
-    @Override
-    public int onMeasure(int width, Context context, AttributeSet attrs) {
-        if (attrs != null) {
-            TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.AbNormalLayout);
-            mAspect = array.getFloat(R.styleable.AbNormalLayout_twoCardsAspect, mAspect);
-            array.recycle();
-        } else {
-            mAspect = 0.5f;
-        }
-        return (int) (width * mAspect);
+    public TwoCellLayoutManager(float mAspect) {
+        super(mAspect);
     }
 
     @Override
