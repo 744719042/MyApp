@@ -1,7 +1,24 @@
 <resources>
-    <string name="app_name">MyApp</string>
     <string name="home">首页</string>
     <string name="shop_title">商家</string>
     <string name="order_title">订单</string>
     <string name="about_me">我的</string>
+
+    <string name="about_download_text">下载效果</string>
+    <string name="about_designer_text">关注设计师</string>
+    <string name="about_coupon_text">优惠券</string>
+    <string name="about_my_order">我的订单</string>
+    <string name="about_unpaid">待付款</string>
+    <string name="about_undelivery">待发货</string>
+    <string name="about_unreceived">待收货</string>
+    <string name="about_uncommented">待评价</string>
+    <string name="about_settings">设置中心</string>
+    <string name="about_my_address">我的地址</string>
+    <string name="about_helper">帮助中心</string>
+    <string name="about_us">关于我们</string>
+    <string name="about_more_order">查看更多订单</string>
+    <string name="settings_clear_cache">清除缓存</string>
+    <string name="settings_logout">退出登录</string>
+    <string name="settings_title">设置</string>
+
 </resources>

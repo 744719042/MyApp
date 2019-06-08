@@ -1,10 +1,13 @@
 package com.example.shop.ui.fragment;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.example.base.recycler.BaseRecyclerAdapter;
 import com.example.base.ui.PagedFragment;
+import com.example.base.utils.UIUtils;
 import com.example.imagefetcher.utils.CollectionUtils;
 import com.example.injection.Inject;
 import com.example.injection.Module;
@@ -30,6 +33,12 @@ public class ShopListFragment extends PagedFragment {
     }
 
     @Override
+    protected void initViews(View view) {
+        super.initViews(view);
+        view.setPadding(0, UIUtils.getStatusBarHeight(), 0, 0);
+    }
+
+    @Override
     protected BaseRecyclerAdapter createAdapter() {
         return new ShopAdapter(new ArrayList<Shop>(), getContext());
     }
@@ -45,6 +54,7 @@ public class ShopListFragment extends PagedFragment {
                     } else {
                         recyclerAdapter.appendData(shops);
                     }
+                    pullRefreshView.notifyRefreshComplete();
                     pageDelegate.onLoaded(-1, shops.size());
                 } else {
                     pageDelegate.onError();

@@ -78,32 +78,6 @@
         </FrameLayout>
 
         <FrameLayout
-            android:id="@+id/main_bottom_menu_order"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:layout_marginTop="4.5dp"
-                android:layout_gravity="center_horizontal"
-                android:id="@+id/main_menu_order_image"
-                android:scaleType="fitXY"
-                android:src="@drawable/main_bottom_menu_order_sel"
-                android:layout_width="28dp"
-                android:layout_height="28dp" />
-
-            <TextView
-                android:id="@+id/main_menu_order_text"
-                android:text="@string/order_title"
-                android:textColor="@color/main_bottom_menu_text_color"
-                android:layout_gravity="center_horizontal|bottom"
-                android:textSize="10sp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </FrameLayout>
-
-        <FrameLayout
             android:id="@+id/main_bottom_menu_about_me"
             android:layout_width="0dp"
             android:layout_weight="1"

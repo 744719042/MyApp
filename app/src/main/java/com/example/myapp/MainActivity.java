@@ -29,7 +29,6 @@ public class MainActivity extends BaseActivity implements PermissionsListener {
     private static final String KEY_CURRENT_TAB = "key_current_tab";
     private static final String TAG_HOME = "home";
     private static final String TAG_SHOP = "shop";
-    private static final String TAG_ORDER = "order";
     private static final String TAG_MINE = "mine";
 
     private static final String[] PERMISSIONS = new String[] {
@@ -41,8 +40,6 @@ public class MainActivity extends BaseActivity implements PermissionsListener {
     private TextView mHomeText;
     private ImageView mShopImage;
     private TextView mShopText;
-    private ImageView mOrderImage;
-    private TextView mOrderText;
     private ImageView mMineImage;
     private TextView mMineText;
 
@@ -90,9 +87,6 @@ public class MainActivity extends BaseActivity implements PermissionsListener {
         FrameLayout shopButton = findViewById(R.id.main_bottom_menu_shop);
         mShopImage = findViewById(R.id.main_menu_shop_image);
         mShopText = findViewById(R.id.main_menu_shop_text);
-        FrameLayout orderButton = findViewById(R.id.main_bottom_menu_order);
-        mOrderImage = findViewById(R.id.main_menu_order_image);
-        mOrderText = findViewById(R.id.main_menu_order_text);
         FrameLayout mineButton = findViewById(R.id.main_bottom_menu_about_me);
         mMineImage = findViewById(R.id.main_menu_me_image);
         mMineText = findViewById(R.id.main_menu_me_text);
@@ -106,12 +100,6 @@ public class MainActivity extends BaseActivity implements PermissionsListener {
         shopButton.setOnClickListener(view -> {
             if (!TAG_SHOP.equals(currentTab)) {
                 onShopChecked();
-            }
-        });
-
-        orderButton.setOnClickListener(view -> {
-            if (!TAG_ORDER.equals(currentTab)) {
-                onOrderChecked();
             }
         });
 
@@ -150,15 +138,6 @@ public class MainActivity extends BaseActivity implements PermissionsListener {
         setCurrentFragment(TAG_SHOP);
     }
 
-    private void onOrderChecked() {
-        checkOrder();
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
-        }
-        setCurrentFragment(TAG_ORDER);
-    }
-
     private void onHomeChecked() {
         checkHome();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -170,28 +149,18 @@ public class MainActivity extends BaseActivity implements PermissionsListener {
 
     private void checkHome() {
         setHomeChecked(true);
-        setOrderChecked(false);
-        setShopChecked(false);
-        setMineChecked(false);
-    }
-
-    private void checkOrder() {
-        setHomeChecked(false);
-        setOrderChecked(true);
         setShopChecked(false);
         setMineChecked(false);
     }
 
     private void checkShop() {
         setHomeChecked(false);
-        setOrderChecked(false);
         setShopChecked(true);
         setMineChecked(false);
     }
 
     private void checkMine() {
         setHomeChecked(false);
-        setOrderChecked(false);
         setShopChecked(false);
         setMineChecked(true);
     }
@@ -204,11 +173,6 @@ public class MainActivity extends BaseActivity implements PermissionsListener {
     private void setShopChecked(boolean checked) {
         mShopText.setSelected(checked);
         mShopImage.setSelected(checked);
-    }
-
-    private void setOrderChecked(boolean checked) {
-        mOrderText.setSelected(checked);
-        mOrderImage.setSelected(checked);
     }
 
     private void setHomeChecked(boolean checked) {
@@ -231,9 +195,6 @@ public class MainActivity extends BaseActivity implements PermissionsListener {
                     break;
                 case TAG_SHOP:
                     fragment = new ShopListFragment();
-                    break;
-                case TAG_ORDER:
-                    fragment = new OrderListFragment();
                     break;
                 case TAG_MINE:
                     fragment = new MineFragment();

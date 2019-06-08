@@ -17,11 +17,11 @@ public class BaseRecyclerView extends RecyclerView {
     private Adapter mAdapter;
 
     public BaseRecyclerView(@NonNull Context context) {
-        super(context);
+        this(context, null);
     }
 
     public BaseRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs, 0);
     }
 
     public BaseRecyclerView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyle) {

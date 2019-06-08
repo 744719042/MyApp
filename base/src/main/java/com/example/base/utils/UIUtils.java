@@ -15,7 +15,7 @@ public class UIUtils {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().getDisplayMetrics());
     }
 
-    private static int getStatusBarHeight() {
+    public static int getStatusBarHeight() {
         try {
             int result = dp2px(24);
             int resourceId = BaseApplication.getContext()
@@ -30,7 +30,7 @@ public class UIUtils {
         }
     }
 
-    private static int getNavigationBarHeight() {
+    public static int getNavigationBarHeight() {
         try {
             int result = 0;
             int resourceId = BaseApplication.getContext()

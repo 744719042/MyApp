@@ -18,6 +18,13 @@ public class HeaderWrapperAdapter extends RecyclerView.Adapter<BaseRecyclerViewH
         this.mHeaders = headers;
         this.mFooters = footers;
         this.mAdapter = adapter;
+        this.mAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+            @Override
+            public void onChanged() {
+                super.onChanged();
+                HeaderWrapperAdapter.this.notifyDataSetChanged();
+            }
+        });
     }
 
     @NonNull

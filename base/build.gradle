@@ -36,6 +36,9 @@ dependencies {
     api 'com.android.support:appcompat-v7:28.0.0'
     api 'com.android.support:support-v4:28.0.0'
     api 'com.android.support:recyclerview-v7:28.0.0'
+    api "com.android.support:cardview-v7:28.0.0"
+    api "com.android.support:percent:28.0.0"
+    api "com.android.support:design:28.0.0"
 
     api project(':base:injection')
     api project(':base:network')

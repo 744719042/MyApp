@@ -1,14 +1,448 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MineFragment">
+    android:background="#f5f5f5">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.percent.PercentFrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="top"
+            android:scaleType="centerCrop"
+            android:src="@drawable/main_about_me_bg"
+            app:layout_aspectRatio="202%"
+            app:layout_widthPercent="100%" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/about_login_layout"
+                    android:visibility="gone"
+                    android:layout_marginTop="43dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.example.base.widget.CircleImageView
+                        android:id="@+id/about_account_avatar"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp" />
+
+                    <TextView
+                        android:id="@+id/about_account_name"
+                        android:textColor="@color/main_white"
+                        android:textSize="21sp"
+                        android:layout_gravity="center_vertical"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="17.5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/about_login_button"
+                    android:layout_width="110dp"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="50dp"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/main_about_login_ic" />
+
+                <ImageView
+                    android:id="@+id/main_test_config_iv"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="right" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+    </android.support.percent.PercentFrameLayout>
+
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/main_white"
+        app:cardCornerRadius="10dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="@string/about_my_order"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:paddingTop="10.5dp"
+                    android:paddingBottom="10.5dp"
+                    android:textColor="#383e50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10.5dp"
+                    android:paddingBottom="10.5dp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/about_more_order"
+                    android:text="@string/about_more_order"
+                    android:paddingTop="10.5dp"
+                    android:paddingBottom="10.5dp"
+                    android:drawablePadding="9dp"
+                    android:textColor="#999999"
+                    android:drawableRight="@drawable/main_about_more_arrow_ic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <ImageView
+                android:src="#979fb8"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingBottom="24dp"
+                android:paddingTop="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/about_unpaid_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/about_unpaid_image"
+                        android:layout_marginTop="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/main_about_wallert_ic"
+                        android:layout_width="26dp"
+                        android:layout_height="20dp" />
+
+                    <TextView
+                        android:layout_below="@id/about_unpaid_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="#666666"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/about_unpaid" />
+
+                    <TextView
+                        android:id="@+id/about_unpaid_count"
+                        android:textSize="11sp"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:gravity="center"
+                        android:background="@drawable/about_status_count_bg"
+                        tools:text="1"
+                        android:layout_toRightOf="@id/about_unpaid_image"
+                        android:layout_marginLeft="-10dp"
+                        android:layout_alignTop="@id/about_unpaid_image"
+                        android:layout_marginTop="-8dp"
+                        android:textColor="#f04134"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/about_undelivery_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/about_undelivery_image"
+                        android:layout_marginTop="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/main_about_goods_ic"
+                        android:layout_width="26dp"
+                        android:layout_height="20dp" />
+
+                    <TextView
+                        android:layout_below="@id/about_undelivery_image"
+                        android:text="@string/about_undelivery"
+                        android:layout_marginTop="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="#666666"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/about_undelivery_count"
+                        android:textSize="11sp"
+                        tools:visibility="visible"
+                        android:visibility="gone"
+                        android:gravity="center"
+                        android:background="@drawable/about_status_count_bg"
+                        tools:text="1"
+                        android:layout_toRightOf="@id/about_undelivery_image"
+                        android:layout_marginLeft="-10dp"
+                        android:layout_alignTop="@id/about_undelivery_image"
+                        android:layout_marginTop="-8dp"
+                        android:textColor="#f04134"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/about_receive_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/about_unreceived_image"
+                        android:layout_marginTop="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/main_about_truck_ic"
+                        android:layout_width="26dp"
+                        android:layout_height="20dp" />
+
+                    <TextView
+                        android:layout_below="@id/about_unreceived_image"
+                        android:text="@string/about_unreceived"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:textColor="#666666"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/about_unreceived_count"
+                        android:visibility="gone"
+                        android:textSize="11sp"
+                        tools:visibility="visible"
+                        android:gravity="center"
+                        android:background="@drawable/about_status_count_bg"
+                        tools:text="1"
+                        android:layout_toRightOf="@id/about_unreceived_image"
+                        android:layout_marginLeft="-10dp"
+                        android:layout_alignTop="@id/about_unreceived_image"
+                        android:layout_marginTop="-8dp"
+                        android:textColor="#f04134"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/about_uncomment_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/about_uncomment_image"
+                        android:layout_marginTop="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/main_about_message_ic"
+                        android:layout_width="26dp"
+                        android:layout_height="20dp" />
+
+                    <TextView
+                        android:layout_below="@id/about_uncomment_image"
+                        android:text="@string/about_uncommented"
+                        android:layout_marginTop="10dp"
+                        android:layout_centerHorizontal="true"
+                        android:textColor="#666666"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/about_uncomment_count"
+                        android:visibility="gone"
+                        tools:visibility="visible"
+                        android:textSize="11sp"
+                        android:gravity="center"
+                        android:background="@drawable/about_status_count_bg"
+                        tools:text="1"
+                        android:layout_toRightOf="@id/about_uncomment_image"
+                        android:layout_marginLeft="-10dp"
+                        android:layout_alignTop="@id/about_uncomment_image"
+                        android:layout_marginTop="-8dp"
+                        android:textColor="#f04134"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:background="@color/main_white"
+        app:cardCornerRadius="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="@string/about_settings"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:paddingTop="10.5dp"
+                    android:paddingBottom="10.5dp"
+                    android:textColor="#383e50"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:paddingTop="10.5dp"
+                    android:paddingBottom="10.5dp"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/about_more_settings"
+                    android:text="更多"
+                    android:drawablePadding="9dp"
+                    android:paddingTop="10.5dp"
+                    android:paddingBottom="10.5dp"
+                    android:textColor="#999999"
+                    android:drawableRight="@drawable/main_about_more_arrow_ic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <ImageView
+                android:src="#979fb8"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:paddingTop="22dp"
+                android:paddingBottom="22dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/about_my_address_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/main_about_my_address_ic"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+
+                    <TextView
+                        android:text="@string/about_my_address"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="#666666"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/about_helper_center_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/main_about_helper_center_ic"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+
+                    <TextView
+                        android:text="@string/about_helper"
+                        android:textColor="#666666"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/about_us_layout"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_gravity="center_horizontal"
+                        android:src="@drawable/main_about_us_ic"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp" />
+
+                    <TextView
+                        android:text="@string/about_us"
+                        android:textColor="#666666"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
