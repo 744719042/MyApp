@@ -199,7 +199,7 @@ public class LoadInfo {
                         dispatcher.submit(loadInfo);
                     }
                     ViewTreeObserver.OnPreDrawListener listener = map.remove(imageView);
-                    if (listener != this) {
+                    if (listener != null && listener != this) {
                         map.put(imageView, listener);
                     }
                     imageView.getViewTreeObserver().removeOnPreDrawListener(this);

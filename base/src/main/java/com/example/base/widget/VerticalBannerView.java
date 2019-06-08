@@ -60,6 +60,7 @@ public class VerticalBannerView extends FrameLayout {
             return;
         }
 
+        removeAllViews();
         currentView = adapter.getView(0, null, this);
         recycleView = adapter.getView(1, null, this);
         current = 0;

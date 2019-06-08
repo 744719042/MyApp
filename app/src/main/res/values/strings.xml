@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MyApp</string>
+    <string name="home">首页</string>
+    <string name="shop_title">商家</string>
+    <string name="order_title">订单</string>
+    <string name="about_me">我的</string>
 </resources>

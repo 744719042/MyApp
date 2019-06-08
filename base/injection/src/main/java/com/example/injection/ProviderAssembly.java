@@ -57,6 +57,7 @@ public class ProviderAssembly {
 
             try {
                 Constructor<?> constructor = binding.getProvider().getConstructor(paramTypes);
+                constructor.setAccessible(true);
                 Object object = ((Provider) (constructor.newInstance(objects))).get();
                 if (binding.isSingleton() && object != null) {
                     singletonMap.put(key, object);

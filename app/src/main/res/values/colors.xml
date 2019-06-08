@@ -3,4 +3,24 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="color_373c4f">#373c4f</color>
+    <color name="color_ff3267">#ff3267</color>
+    <color name="color_202020">#202020</color>
+    <color name="color_9b9ea7">#9b9ea7</color>
+    <color name="color_383e50">#383e50</color>
+    <color name="color_383e50_30">#4c383e50</color>
+    <color name="color_383e50_60">#99383e50</color>
+    <color name="find_title_text_color">#393939</color>
+    <color name="find_comment_count_color">#ff3267</color>
+
+    <color name="account_register_pressed">#b2171717</color>
+    <color name="account_register_normal">#ff171717</color>
+    <color name="account_login_pressed_color">#00ffffff</color>
+    <color name="account_login_stroke_pressed_color">#b2171717</color>
+    <color name="account_login_normal_color">#00ffffff</color>
+    <color name="account_login_stroke_normal_color">#b2171717</color>
+    <color name="account_login_button_normal_text_color">#ff000000</color>
+    <color name="account_login_button_pressed_text_color">#b2000000</color>
+    <color name="account_other_color">#b2000000</color>
+
 </resources>
