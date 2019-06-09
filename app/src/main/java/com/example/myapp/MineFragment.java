@@ -6,8 +6,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.base.ui.BaseFragment;
+import com.example.imagefetcher.ImageFetcher;
 import com.example.injection.Module;
+import com.example.login.utils.UserPreference;
+import com.example.provider.ImageFetcherProvider;
+import com.example.provider.constant.RouterConstant;
+import com.example.provider.constant.RouterExtra;
+import com.example.provider.model.AccountModel;
+import com.example.routerapi.RouterCallback;
 import com.example.routerapi.RouterManager;
+import com.example.routerapi.RouterRequest;
+import com.example.routerapi.filter.FilterChain;
 
 import java.util.List;
 
@@ -65,6 +74,22 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (UserPreference.getInstance().isLogin()) {
+            AccountModel accountModel = UserPreference.getInstance().getAccountInfo();
+            mLoginLayout.setVisibility(View.VISIBLE);
+            mLogInButton.setVisibility(View.GONE);
+            ImageFetcher imageFetcher = ImageFetcherProvider.getInstance().getImageFetcher();
+            imageFetcher.load(accountModel.getPortrait()).placeHolder(R.drawable.app_place_holder).into(mAvatarImg);
+            mAccountTxt.setText(accountModel.getName());
+        } else {
+            mLogInButton.setVisibility(View.VISIBLE);
+            mLoginLayout.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
     public List<? extends Module> getModules() {
         return null;
     }
@@ -75,12 +100,36 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         }
 
         if (v == mAccountTxt || v == mAvatarImg) {
-
+            RouterManager.getInstance().with("/user/detail").withActivity(getActivity()).navigate();
         } else if (v == mLogInButton) {
-            RouterManager.getInstance().with("/login/login").withActivity(getActivity()).navigate();
+            RouterManager.getInstance().with(RouterConstant.Login.LOGIN).withActivity(getActivity()).navigate();
         } else if (v == mSeeAllOrder || v == mTopItemNotPaid || v == mTopItemNotDelivery
                 || v == mTopItemNotReceived || v == mTopItemNotComment) {
-            RouterManager.getInstance().with("/order/list").withActivity(getActivity()).navigate();
+            RouterManager.getInstance().with(RouterConstant.Order.ORDER_LIST).withFragment(this).withCallback(new RouterCallback() {
+                @Override
+                public void onFound(RouterRequest request) {
+
+                }
+
+                @Override
+                public void onLost(Throwable throwable) {
+
+                }
+
+                @Override
+                public void onIntercept(RouterRequest request, FilterChain chain) {
+                    RouterManager.getInstance()
+                            .with(RouterConstant.Login.LOGIN)
+                            .withFragment(MineFragment.this)
+                            .withString(RouterConstant.ARG_TARGET_URL, RouterConstant.Order.ORDER_LIST)
+                            .navigate();
+                }
+
+                @Override
+                public void onArrival(RouterRequest request) {
+
+                }
+            }).withExtra(RouterExtra.EXTRA_LOGIN).navigate();
         }
     }
 }

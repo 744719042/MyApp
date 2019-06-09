@@ -3,6 +3,7 @@ package com.example.routerapi;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
 import com.example.routerapi.disptcher.RouterDispatcherHelper;
 import com.example.routerbase.RouterConfig;
@@ -16,17 +17,19 @@ public class RouterRequest {
     private int mRequestCode;
     private int mExtra;
     private WeakReference<Activity> mActivity;
+    private WeakReference<Fragment> mFragment;
     private Context mContext;
     private RouterCallback mCallback;
     private RouterConfig mConfig;
 
     private RouterRequest(String path, Bundle params, int requestCode, int extra,
-                          Activity activity, Context context, RouterCallback callback) {
+                          Activity activity, Fragment fragment, Context context, RouterCallback callback) {
         this.mPath = path;
         this.mParams = params;
         this.mRequestCode = requestCode;
         this.mExtra = extra;
         this.mActivity = new WeakReference<>(activity);
+        this.mFragment = new WeakReference<>(fragment);
         this.mContext = context == null ? null : context.getApplicationContext();
         this.mCallback = callback;
     }
@@ -51,6 +54,10 @@ public class RouterRequest {
         return mActivity == null || mActivity.get() == null ? null : mActivity.get();
     }
 
+    public Fragment getFragment() {
+        return mFragment == null || mFragment.get() == null ? null : mFragment.get();
+    }
+
     public Context getContext() {
         return mContext;
     }
@@ -73,6 +80,7 @@ public class RouterRequest {
         private int requestCode = -1;
         private int extra = 0;
         private Activity activity;
+        private Fragment fragment;
         private Context context;
         private RouterCallback callback;
 
@@ -115,6 +123,11 @@ public class RouterRequest {
             return this;
         }
 
+        public Builder withFragment(Fragment fragment) {
+            this.fragment = fragment;
+            return this;
+        }
+
         public Builder withContext(Context context) {
             this.context = context.getApplicationContext();
             return this;
@@ -130,12 +143,23 @@ public class RouterRequest {
             return this;
         }
 
+        public Builder withBundle(Bundle bundle) {
+            this.bundle = bundle;
+            return this;
+        }
+
+        public Builder withRequestCode(int requestCode) {
+            this.requestCode = requestCode;
+            return this;
+        }
+
         public void navigate() {
             RouterDispatcherHelper.dispatch(build());
         }
 
         public RouterRequest build() {
-            return new RouterRequest(path, bundle, requestCode, extra, activity, context, callback);
+            return new RouterRequest(path, bundle, requestCode, extra, activity, fragment, context, callback);
         }
+
     }
 }

@@ -2,6 +2,8 @@ package com.example.routerapi.filter;
 
 import com.example.routerapi.ErrorHandler;
 import com.example.routerapi.RouterCallback;
+import com.example.routerapi.disptcher.RouterDispatcher;
+import com.example.routerapi.disptcher.RouterDispatcherHelper;
 import com.example.routerbase.RouterConfig;
 import com.example.routerapi.RouterManager;
 import com.example.routerapi.RouterRequest;
@@ -18,10 +20,13 @@ public class RequestInitFilter implements Filter {
             if (callback != null) {
                 callback.onLost(null);
             } else {
-                RouterRequest errorRequest = new RouterRequest.Builder("/error/handler").build();
-                ErrorHandler handler = (ErrorHandler) RouterManager.getInstance().navigate(errorRequest);
-                if (handler != null) {
-                    handler.onError(-1);
+                String errorPath = "/provider/error";
+                RouterRequest errorRequest = new RouterRequest.Builder(errorPath).build();
+                RouterConfig errorConfig = RouterManager.getInstance().getRouterConfig(errorPath);
+                errorRequest.setConfig(errorConfig);
+                ErrorHandler errorHandler = (ErrorHandler) RouterDispatcherHelper.dispatchService(errorRequest);
+                if (errorHandler != null) {
+                    errorHandler.onError(-1);
                 }
             }
             return null;

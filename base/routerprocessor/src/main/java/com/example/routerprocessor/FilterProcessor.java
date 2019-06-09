@@ -1,10 +1,10 @@
 package com.example.routerprocessor;
 
 import com.example.routerbase.annotation.Filter;
-import com.example.routerbase.annotation.Router;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -22,6 +22,7 @@ public class FilterProcessor extends AbstractProcessor {
     private Elements mElements;
     private Types mTypes;
     private Filer mFiler;
+    private Set<String> mSet;
     private static final String KEY_MODULE_NAME = "moduleName";
 
     @Override
@@ -30,6 +31,8 @@ public class FilterProcessor extends AbstractProcessor {
         mElements = processingEnvironment.getElementUtils();
         mTypes = processingEnvironment.getTypeUtils();
         mFiler = processingEnvironment.getFiler();
+        mSet = new HashSet<>();
+        mSet.add(Filter.class.getCanonicalName());
     }
 
     @Override
@@ -88,5 +91,10 @@ public class FilterProcessor extends AbstractProcessor {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Set<String> getSupportedAnnotationTypes() {
+        return mSet;
     }
 }

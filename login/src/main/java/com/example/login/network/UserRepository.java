@@ -13,6 +13,8 @@ import com.example.network.wrapper.core.NetworkWrapper;
 import com.example.provider.GsonProvider;
 import com.example.provider.model.AccountModel;
 
+import java.io.IOException;
+
 public class UserRepository {
     private UserApi userApi;
     private NetworkWrapper networkWrapper;
@@ -27,14 +29,13 @@ public class UserRepository {
     public void login(String name, String password, final DataCallback<AccountModel> callback) {
         UserPreference.getInstance().clearAccountInfo();
         HttpClient httpClient = networkWrapper.getHttpClient();
-        UserApi userApi = networkWrapper.create(UserApi.class);
         final Request request = userApi.login(name, password);
         httpClient.enqueue(request, new Callback() {
             @Override
             public void onSuccess(Response response) {
                 Headers headers = response.getHeaders();
                 String session = "";
-                String cookieString = headers.getValues().get("Set-Cookies");
+                String cookieString = headers.getValues().get("Set-Cookie");
                 String[] cookies = cookieString.split(";");
                 for (String cookie : cookies) {
                     if (cookie.contains("JSESSIONID")) {
@@ -43,7 +44,12 @@ public class UserRepository {
                     }
                 }
 
-                String userInfo = response.getResponseBody().toString();
+                String userInfo = null;
+                try {
+                    userInfo = response.getResponseBody().string();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 final AccountModel accountModel = GsonProvider.getInstance().getGson().fromJson(userInfo, AccountModel.class);
                 UserPreference.getInstance().saveLoginInfo(accountModel, session);
 

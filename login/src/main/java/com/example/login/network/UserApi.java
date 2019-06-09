@@ -6,5 +6,5 @@ import com.example.network.wrapper.annotation.POST;
 
 public interface UserApi {
     @POST(path = "/HttpServer/login")
-    Request login(@Field(name = "username") String userName, @Field(name = "password") String password);
+    Request login(@Field(name = "name") String userName, @Field(name = "password") String password);
 }
