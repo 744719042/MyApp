@@ -3,6 +3,7 @@ package com.example.shop.network;
 import com.example.network.Request;
 import com.example.network.wrapper.core.DataCallback;
 import com.example.network.wrapper.core.NetworkWrapper;
+import com.example.shop.model.Goods;
 import com.example.shop.model.Shop;
 import com.example.shop.model.ShopDetail;
 
@@ -24,6 +25,11 @@ public class ShopRepository {
 
     public void getShopDetail(int id, DataCallback<ShopDetail> callback) {
         Request request = shopApi.getShopDetail(id);
+        networkWrapper.enqueue(request, callback);
+    }
+
+    public void getGoodsList(int shopId, DataCallback<List<Goods>> callback) {
+        Request request = shopApi.getGoodsList(shopId);
         networkWrapper.enqueue(request, callback);
     }
 }

@@ -1,6 +1,5 @@
 package com.example.shop.ui.fragment;
 
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,6 +12,8 @@ import com.example.injection.Inject;
 import com.example.injection.Module;
 import com.example.network.MyNetException;
 import com.example.network.wrapper.core.DataCallback;
+import com.example.provider.constant.RouterConstant;
+import com.example.routerapi.RouterManager;
 import com.example.shop.ShopModule;
 import com.example.shop.adapter.ShopAdapter;
 import com.example.shop.model.Shop;
@@ -41,6 +42,17 @@ public class ShopListFragment extends PagedFragment {
     @Override
     protected BaseRecyclerAdapter createAdapter() {
         return new ShopAdapter(new ArrayList<Shop>(), getContext());
+    }
+
+    @Override
+    protected void initData() {
+        super.initData();
+        recyclerAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position, Object item) {
+                RouterManager.getInstance().with(RouterConstant.Shop.SHOP_DETAIL).withActivity(getActivity()).navigate();
+            }
+        });
     }
 
     @Override

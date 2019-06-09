@@ -10,4 +10,7 @@ public interface ShopApi {
 
     @GET(path="/HttpServer/shop/detail")
     Request getShopDetail(@Query(name = "id") int id);
+
+    @GET(path = "/HttpServer/shop/goods")
+    Request getGoodsList(@Query(name = "shopId") int shopId);
 }

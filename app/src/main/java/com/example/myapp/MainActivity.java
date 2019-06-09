@@ -16,7 +16,6 @@ import android.widget.Toast;
 import com.example.base.permission.PermissionManager;
 import com.example.base.permission.PermissionsListener;
 import com.example.base.ui.BaseActivity;
-import com.example.comment.activity.CommentListFragment;
 import com.example.home.ui.fragment.HomeFragment;
 import com.example.injection.Module;
 import com.example.routerbase.annotation.Router;
@@ -194,8 +193,7 @@ public class MainActivity extends BaseActivity implements PermissionsListener {
                     fragment = new HomeFragment();
                     break;
                 case TAG_SHOP:
-//                    fragment = new ShopListFragment();
-                    fragment = new CommentListFragment();
+                    fragment = new ShopListFragment();
                     break;
                 case TAG_MINE:
                     fragment = new MineFragment();
