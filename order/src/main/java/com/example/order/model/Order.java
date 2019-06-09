@@ -2,11 +2,12 @@ package com.example.order.model;
 
 public class Order {
     private int id;
-    private String name;
     private String url;
-    private String desc;
-    private float score;
-    private String sales;
+    private String name;
+    private String status;
+    private String orderTime;
+    private String goodsName;
+    private String totalPrice;
 
     public int getId() {
         return id;
@@ -32,27 +33,35 @@ public class Order {
         this.url = url;
     }
 
-    public String getDesc() {
-        return desc;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public float getScore() {
-        return score;
+    public String getGoodsName() {
+        return goodsName;
     }
 
-    public void setScore(float score) {
-        this.score = score;
+    public void setGoodsName(String goodsName) {
+        this.goodsName = goodsName;
     }
 
-    public String getSales() {
-        return sales;
+    public String getTotalPrice() {
+        return totalPrice;
     }
 
-    public void setSales(String sales) {
-        this.sales = sales;
+    public void setTotalPrice(String totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getOrderTime() {
+        return orderTime;
+    }
+
+    public void setOrderTime(String orderTime) {
+        this.orderTime = orderTime;
     }
 }

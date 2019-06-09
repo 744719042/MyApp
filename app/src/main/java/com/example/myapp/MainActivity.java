@@ -18,7 +18,6 @@ import com.example.base.permission.PermissionsListener;
 import com.example.base.ui.BaseActivity;
 import com.example.home.ui.fragment.HomeFragment;
 import com.example.injection.Module;
-import com.example.order.ui.fragment.OrderListFragment;
 import com.example.routerbase.annotation.Router;
 import com.example.shop.ui.fragment.ShopListFragment;
 

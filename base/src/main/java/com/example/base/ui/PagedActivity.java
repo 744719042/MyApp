@@ -26,16 +26,16 @@ public abstract class PagedActivity<T> extends BaseActivity implements PageLoade
 
     @Override
     protected void initViews() {
-//        recyclerAdapter = createAdapter();
-//        pageDelegate = new PageDelegate(this, getLayoutManager(), this);
-//        pullRefreshView = findViewById(R.id.activity_pull_refresh_root);
-//        pullRefreshView.setRefreshListener(this);
-//        pullRefreshView.setContentView(pageDelegate.getRecyclerView());
-//        recyclerView = (BaseRecyclerView) pullRefreshView.getContentView();
-//        recyclerView.setAdapter(recyclerAdapter);
-//
-//        contentView = findViewById(R.id.activity_content);
-//        npeDelegate = new NPEDelegate(getErrorLayoutRes(), getEmptyLayoutRes(), getLoadingLayoutRes(), contentView);
+        recyclerAdapter = createAdapter();
+        pageDelegate = new PageDelegate(this, getLayoutManager(), this);
+        pullRefreshView = findViewById(R.id.activity_pull_refresh_root);
+        pullRefreshView.setRefreshListener(this);
+        pullRefreshView.setContentView(pageDelegate.getRecyclerView());
+        recyclerView = (BaseRecyclerView) pullRefreshView.getContentView();
+        recyclerView.setAdapter(recyclerAdapter);
+
+        contentView = findViewById(R.id.activity_content);
+        npeDelegate = new NPEDelegate(getErrorLayoutRes(), getEmptyLayoutRes(), getLoadingLayoutRes(), contentView);
     }
 
     protected int getLoadingLayoutRes() {

@@ -80,7 +80,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
             RouterManager.getInstance().with("/login/login").withActivity(getActivity()).navigate();
         } else if (v == mSeeAllOrder || v == mTopItemNotPaid || v == mTopItemNotDelivery
                 || v == mTopItemNotReceived || v == mTopItemNotComment) {
-
+            RouterManager.getInstance().with("/order/list").withActivity(getActivity()).navigate();
         }
     }
 }
