@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Router(path = "/order/list")
+@Router(path = "/comment/list")
 public class CommentListFragment extends PagedFragment {
 
     @Inject
