@@ -161,7 +161,9 @@ public class HorizontalBannerView extends FrameLayout {
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
-        drawCircles(canvas);
+        if (pagerAdapter != null) {
+            drawCircles(canvas);
+        }
     }
 
     private void drawCircles(Canvas canvas) {
