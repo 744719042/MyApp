@@ -1,14 +1,16 @@
 package com.example.provider;
 
-import com.example.injection.Injector;
 import com.example.provider.manager.AccountManager;
 
 public class AccountProvider {
     private AccountManager accountManager;
 
     private AccountProvider() {
-        Injector injector = GlobalInjectorProvider.getInstance().getGlobalInjector();
-        accountManager = (AccountManager) injector.getObject(AccountManager.class);
+
+    }
+
+    public void initAccountMananger(AccountManager accountManager) {
+        this.accountManager = accountManager;
     }
 
     public AccountManager getAccountManager() {

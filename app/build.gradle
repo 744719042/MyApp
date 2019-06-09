@@ -42,4 +42,6 @@ dependencies {
     implementation project(':shop')
     implementation project(':comment')
     implementation project(':order')
+
+    annotationProcessor project(':base:routerprocessor')
 }

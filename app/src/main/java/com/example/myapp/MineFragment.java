@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.example.base.ui.BaseFragment;
 import com.example.injection.Module;
+import com.example.routerapi.RouterManager;
 
 import java.util.List;
 
@@ -76,7 +77,7 @@ public class MineFragment extends BaseFragment implements View.OnClickListener {
         if (v == mAccountTxt || v == mAvatarImg) {
 
         } else if (v == mLogInButton) {
-
+            RouterManager.getInstance().with("/login/login").withActivity(getActivity()).navigate();
         } else if (v == mSeeAllOrder || v == mTopItemNotPaid || v == mTopItemNotDelivery
                 || v == mTopItemNotReceived || v == mTopItemNotComment) {
 
