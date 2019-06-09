@@ -13,7 +13,7 @@ public class GlobalErrorHandler implements ErrorHandler {
     private static final String TAG = "GlobalErrorHandler";
     @Override
     public void onError(int code) {
-        Toast.makeText(BaseApplication.getContext(), "没有发现跳转到额路径配置", Toast.LENGTH_SHORT).show();
+        Toast.makeText(BaseApplication.getContext(), "没有发现跳转到的路径配置", Toast.LENGTH_SHORT).show();
         Log.e(TAG, "No Router Config found");
     }
 }
