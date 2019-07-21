@@ -5,8 +5,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.UserManager;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -16,8 +18,11 @@ import android.widget.Toast;
 import com.example.base.permission.PermissionManager;
 import com.example.base.permission.PermissionsListener;
 import com.example.base.ui.BaseActivity;
+import com.example.base.utils.LogUtils;
 import com.example.home.ui.fragment.HomeFragment;
 import com.example.injection.Module;
+import com.example.provider.AccountProvider;
+import com.example.provider.manager.AccountManager;
 import com.example.routerbase.annotation.Router;
 import com.example.shop.ui.fragment.ShopListFragment;
 
@@ -25,6 +30,7 @@ import java.util.List;
 
 @Router(path="/app/index")
 public class MainActivity extends BaseActivity implements PermissionsListener {
+    private static final String TAG = "MainActivity";
     private static final String KEY_CURRENT_TAB = "key_current_tab";
     private static final String TAG_HOME = "home";
     private static final String TAG_SHOP = "shop";
@@ -117,6 +123,24 @@ public class MainActivity extends BaseActivity implements PermissionsListener {
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             getWindow().setStatusBarColor(0x16000000);
         }
+
+        AccountManager accountManager = AccountProvider.getInstance().getAccountManager();
+        accountManager.registerListener(new AccountManager.AccountListener() {
+            @Override
+            public void onLoginSuccess() {
+                LogUtils.i(TAG, "login success");
+            }
+
+            @Override
+            public void onLoginFailure() {
+                LogUtils.i(TAG, "login failure");
+            }
+
+            @Override
+            public void onLogout() {
+
+            }
+        });
     }
 
     private void onMineChecked() {

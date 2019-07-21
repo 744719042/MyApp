@@ -11,8 +11,9 @@ public interface AccountManager {
 
     AccountModel getAccount();
     boolean isLogin();
-    void login();
-    void logout();
+    void notifyLoginSuccess();
+    void notifyLoginFailure();
+    void notifyLogout();
     void registerListener(AccountListener listener);
     void unregisterListener(AccountListener listener);
 }

@@ -7,7 +7,7 @@ public class NetworkProvider {
 
     private NetworkWrapper networkWrapper;
     private HttpClient httpClient;
-    private static final String HOST = "192.168.137.240";
+    private static final String HOST = "192.168.137.224";
 
     public NetworkProvider() {
         httpClient = new HttpClient.Builder()

@@ -18,6 +18,7 @@ import com.example.login.UserModule;
 import com.example.login.network.UserRepository;
 import com.example.network.MyNetException;
 import com.example.network.wrapper.core.DataCallback;
+import com.example.provider.AccountProvider;
 import com.example.provider.constant.RouterConstant;
 import com.example.provider.model.AccountModel;
 import com.example.routerapi.RouterManager;
@@ -90,6 +91,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 if (!TextUtils.isEmpty(targetUrl)) {
                     RouterManager.getInstance().with(targetUrl).withActivity(LoginActivity.this).withBundle(bundle).navigate();
                 }
+                AccountProvider.getInstance().getAccountManager().notifyLoginSuccess();
                 setResult(Activity.RESULT_OK);
                 finish();
             }
@@ -97,6 +99,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             @Override
             public void onFailure(int code, MyNetException e) {
                 String msg = e == null ? "登录失败" : e.getMessage();
+                AccountProvider.getInstance().getAccountManager().notifyLoginSuccess();
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
             }
         });

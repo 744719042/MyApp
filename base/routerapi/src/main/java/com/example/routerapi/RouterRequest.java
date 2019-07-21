@@ -153,8 +153,8 @@ public class RouterRequest {
             return this;
         }
 
-        public void navigate() {
-            RouterDispatcherHelper.dispatch(build());
+        public Object navigate() {
+            return RouterDispatcherHelper.dispatch(build());
         }
 
         public RouterRequest build() {
