@@ -15,7 +15,6 @@ public class PageDelegate extends RecyclerView.OnScrollListener {
     public PageDelegate(Activity activity, RecyclerView.LayoutManager layoutManager, PageLoader pageLoader) {
         this.pageIterator = new PageIterator(pageLoader);
         this.recyclerView = new BaseRecyclerView(activity);
-        this.recyclerView.addOnScrollListener(this);
         this.recyclerView.setLayoutManager(layoutManager);
     }
 

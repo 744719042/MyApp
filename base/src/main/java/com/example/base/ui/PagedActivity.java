@@ -33,6 +33,7 @@ public abstract class PagedActivity<T> extends BaseActivity implements PageLoade
         pullRefreshView.setContentView(pageDelegate.getRecyclerView());
         recyclerView = (BaseRecyclerView) pullRefreshView.getContentView();
         recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.addOnScrollListener(pageDelegate);
 
         contentView = findViewById(R.id.activity_content);
         npeDelegate = new NPEDelegate(getErrorLayoutRes(), getEmptyLayoutRes(), getLoadingLayoutRes(), contentView);

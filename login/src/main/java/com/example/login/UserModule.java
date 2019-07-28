@@ -15,7 +15,7 @@ public class UserModule extends AbsModule {
         bind(NetworkWrapper.class).toInstance(NetworkProvider.getInstance().getNetworkService());
         bind(UserApi.class).toProvider(UserApiProvider.class);
         bind(UserRepository.class).toProvider(UserRepositoryProvider.class);
-        bind(MainThreadPoster.class).toInstance(new MainThreadPoster());
+        bind(MainThreadPoster.class).to(MainThreadPoster.class);
     }
 
     private static class UserApiProvider implements Provider<UserApi> {
