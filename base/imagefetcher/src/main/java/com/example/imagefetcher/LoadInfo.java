@@ -12,7 +12,6 @@ public class LoadInfo {
     private int resourceId;
     private Uri uri;
     private ImageView imageView;
-    private BitmapLoadListener loadListener;
     private int error;
     private int placeholder;
     private int targetWidth;
@@ -29,7 +28,6 @@ public class LoadInfo {
         this.resourceId = builder.resId;
         this.error = builder.error;
         this.imageView = builder.imageView;
-        this.loadListener = builder.loadListener;
         this.placeholder = builder.placeHolder;
         this.uri = builder.uri;
         this.tag = builder.tag;
@@ -54,10 +52,6 @@ public class LoadInfo {
 
     public ImageView getImageView() {
         return imageView;
-    }
-
-    public BitmapLoadListener getLoadListener() {
-        return loadListener;
     }
 
     public ImageFetcher getImageFetcher() {
@@ -111,7 +105,6 @@ public class LoadInfo {
                 "resourceId=" + resourceId +
                 ", uri=" + uri +
                 ", imageView=" + imageView +
-                ", loadListener=" + loadListener +
                 ", error=" + error +
                 ", placeholder=" + placeholder +
                 ", targetWidth=" + targetWidth +
@@ -125,7 +118,6 @@ public class LoadInfo {
 
     public static class Builder {
         private ImageView imageView;
-        private BitmapLoadListener loadListener;
         private int placeHolder;
         private int error;
         private Uri uri;
@@ -208,12 +200,6 @@ public class LoadInfo {
             };
             map.put(imageView, layoutListener);
             imageView.getViewTreeObserver().addOnPreDrawListener(layoutListener);
-        }
-
-        public void into(BitmapLoadListener loadListener) {
-            this.loadListener = loadListener;
-            LoadInfo loadInfo = new LoadInfo(this);
-            dispatcher.submit(loadInfo);
         }
     }
 }

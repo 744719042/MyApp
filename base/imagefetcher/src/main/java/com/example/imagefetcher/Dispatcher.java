@@ -23,20 +23,18 @@ import java.util.concurrent.ExecutorService;
 public class Dispatcher {
     private static final String TAG = "Dispatcher";
     private static final int MSG_SUBMIT_NEW_LOAD = 100;
-    private static final int MSG_SUBMIT_LOAD_LIST = 101;
-    private static final int MSG_CANCEL_TAG = 102;
-    private static final int MSG_PAUSE_TAG = 103;
-    private static final int MSG_RESUME_TAG = 104;
-    private static final int MSG_CANCEL_LOAD = 105;
-    private static final int MSG_COMPLETE_TASK = 106;
-    private static final int MSG_FAIL_TASK = 107;
+    private static final int MSG_CANCEL_TAG = 101;
+    private static final int MSG_PAUSE_TAG = 102;
+    private static final int MSG_RESUME_TAG = 103;
+    private static final int MSG_CANCEL_LOAD = 104;
+    private static final int MSG_COMPLETE_TASK = 105;
+    private static final int MSG_FAIL_TASK = 106;
 
     private Handler dispatchHandler;
     private MainThreadPoster mainThreadPoster;
     private ImageFetcher imageFetcher;
 
     private Map<ImageView, LoadInfo> imageViewMap = new ConcurrentHashMap<>();
-    private Map<BitmapLoadListener, LoadInfo> listenerMap = new ConcurrentHashMap<>();
 
     private Set<Object> pauseTag = new HashSet<>();
     private LinkedHashMap<Object, List<LoadInfo>> pauseMap = new LinkedHashMap<>();
@@ -58,7 +56,6 @@ public class Dispatcher {
 
     private void cancelPreLoad(LoadInfo loadInfo) {
         ImageView imageView = loadInfo.getImageView();
-        BitmapLoadListener listener = loadInfo.getLoadListener();
         if(imageView != null) {
             LoadInfo preloadInfo = imageViewMap.remove(imageView);
             imageViewMap.put(imageView, loadInfo);
@@ -66,19 +63,6 @@ public class Dispatcher {
                 cancelLoad(preloadInfo);
             }
         }
-
-        if (listener != null) {
-            LoadInfo preloadInfo = listenerMap.remove(listener);
-            listenerMap.put(listener, loadInfo);
-            if (preloadInfo != null) {
-                cancelLoad(preloadInfo);
-            }
-        }
-    }
-
-    public void batch(List<LoadInfo> loadInfoList) {
-        Message message = dispatchHandler.obtainMessage(MSG_SUBMIT_LOAD_LIST, loadInfoList);
-        dispatchHandler.sendMessage(message);
     }
 
     public void cancelLoad(LoadInfo loadInfo) {
@@ -184,11 +168,6 @@ public class Dispatcher {
                 imageViewMap.remove(loadInfo.getImageView());
                 loadInfo.getImageView().setImageResource(loadInfo.getError());
             }
-
-            if (loadInfo.getLoadListener() != null) {
-                listenerMap.remove(loadInfo.getLoadListener());
-                loadInfo.getLoadListener().onError(-1);
-            }
         }
     }
 
@@ -215,11 +194,6 @@ public class Dispatcher {
             if (loadInfo.getImageView() != null) {
                 imageViewMap.remove(loadInfo.getImageView());
                 loadInfo.getImageView().setImageBitmap(bitmapTask.result);
-            }
-
-            if (loadInfo.getLoadListener() != null) {
-                listenerMap.remove(loadInfo.getLoadListener());
-                loadInfo.getLoadListener().onSuccess(bitmapTask.result);
             }
         }
     }
